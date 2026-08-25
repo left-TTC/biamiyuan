@@ -1,0 +1,36 @@
+<!-- pages/address/address.wxml -->
+<navigation-bar title="收货地址" back="{{true}}" color="black" background="#F5F6FA"></navigation-bar>
+
+<scroll-view class="scrollarea" scroll-y>
+    <view class="page">
+        <view class="addr-item" wx:for="{{addresses}}" wx:key="id" bindtap="selectAddress" data-id="{{item.id}}">
+            <view class="addr-main">
+                <view class="addr-line1">
+                    <text class="addr-name">{{item.name}}</text>
+                    <text class="addr-phone">{{item.phone}}</text>
+                    <text wx:if="{{item.isDefault}}" class="addr-default">默认</text>
+                </view>
+                <view class="addr-detail">{{item.region}} {{item.detail}}</view>
+            </view>
+            <view class="addr-ops">
+                <view class="op-btn" catchtap="editAddress" data-id="{{item.id}}">✏️ 编辑</view>
+                <view class="op-btn" catchtap="deleteAddress" data-id="{{item.id}}">🗑️ 删除</view>
+            </view>
+            <view class="default-row">
+                <view class="default-left" catchtap="setDefault" data-id="{{item.id}}">
+                    <view class="radio {{item.isDefault ? 'on' : ''}}">
+                        <text wx:if="{{item.isDefault}}">✓</text>
+                    </view>
+                    <text>设为默认</text>
+                </view>
+            </view>
+        </view>
+
+        <view wx:if="{{!addresses.length}}" class="empty">
+            <view class="empty-icon">📍</view>
+            <view class="empty-text">还没有收货地址</view>
+        </view>
+
+        <button class="btn btn-primary btn-block add-btn" bindtap="addAddress">＋ 新增收货地址</button>
+    </view>
+</scroll-view>

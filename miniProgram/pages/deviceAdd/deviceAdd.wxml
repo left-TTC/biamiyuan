@@ -1,0 +1,45 @@
+<!-- pages/deviceAdd/deviceAdd.wxml -->
+<navigation-bar title="添加设备" back="{{true}}" color="black" background="#F5F6FA"></navigation-bar>
+
+<scroll-view class="scrollarea" scroll-y>
+    <view class="page">
+        <!-- 设备类型选择 -->
+        <view class="section-title">选择设备类型</view>
+        <view class="type-grid">
+            <view
+                class="type-cell {{selectedType === item.type ? 'active' : ''}}"
+                wx:for="{{types}}"
+                wx:key="type"
+                bindtap="selectType"
+                data-type="{{item.type}}"
+            >
+                <view class="type-icon" style="background: linear-gradient(135deg, {{item.colors[0]}}, {{item.colors[1]}});">
+                    <text>{{item.icon}}</text>
+                </view>
+                <text class="type-name">{{item.name}}</text>
+            </view>
+        </view>
+
+        <!-- 设备信息 -->
+        <view class="card form-card">
+            <view class="form-row">
+                <text class="form-label">设备名称</text>
+                <input class="form-input" placeholder="如：客厅烟雾报警器" value="{{name}}" bindinput="onName" maxlength="20" />
+            </view>
+            <view class="form-row">
+                <text class="form-label">设备 IMEI</text>
+                <input class="form-input" placeholder="设备IMEI（15位数字，机身标签）" value="{{imei}}" bindinput="onImei" maxlength="30" />
+                <text class="gen-sn" bindtap="genImei">自动生成</text>
+            </view>
+        </view>
+
+        <view class="card tip-card">
+            <view class="tip-title">📌 绑定说明</view>
+            <view class="tip-item">1. 设备须先在硬件平台开户并添加（详见对接文档）</view>
+            <view class="tip-item">2. 输入设备 IMEI，服务器会向平台校验并获取设备 UID</view>
+            <view class="tip-item">3. 一台设备只能绑定一个账号；平台报警/SOS 会实时推送到绑定用户</view>
+        </view>
+
+        <button class="btn btn-primary btn-block save-btn" bindtap="save">绑定设备</button>
+    </view>
+</scroll-view>

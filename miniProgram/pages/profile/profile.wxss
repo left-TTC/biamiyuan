@@ -1,0 +1,96 @@
+/* pages/profile/profile.wxss */
+.avatar-card {
+    margin-top: 20rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40rpx 0;
+}
+
+.avatar-btn {
+    position: relative;
+    width: 160rpx;
+    height: 160rpx;
+    padding: 0;
+    background: transparent;
+    border-radius: 50%;
+    overflow: hidden;
+    line-height: normal;
+}
+
+.avatar-btn::after {
+    border: none;
+}
+
+.avatar {
+    width: 160rpx;
+    height: 160rpx;
+    border-radius: 50%;
+    background: #eef0f4;
+}
+
+.avatar-mask {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.45);
+    color: #fff;
+    font-size: 24rpx;
+    border-radius: 50%;
+}
+
+.avatar-tip {
+    margin-top: 16rpx;
+    font-size: 24rpx;
+    color: #999;
+}
+
+.form-card {
+    margin-top: 20rpx;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    padding: 24rpx 0;
+    border-bottom: 1rpx solid #f0f1f3;
+}
+
+.form-row:last-child {
+    border-bottom: none;
+}
+
+.form-label {
+    width: 180rpx;
+    font-size: 28rpx;
+    color: #1f2329;
+    flex: none;
+}
+
+.form-input {
+    flex: 1;
+    font-size: 28rpx;
+}
+
+.phone-text {
+    flex: 1;
+    font-size: 28rpx;
+    color: #888;
+}
+
+.tip-text {
+    margin-top: 24rpx;
+    padding: 0 8rpx;
+    font-size: 24rpx;
+    color: #999;
+    line-height: 1.6;
+}
+
+.save-btn {
+    margin-top: 40rpx;
+}

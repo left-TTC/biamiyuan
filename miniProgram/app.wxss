@@ -1,0 +1,199 @@
+/* app.wxss 全局样式 */
+
+page {
+    background: #f5f6fa;
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    color: #1f2329;
+    font-size: 28rpx;
+    line-height: 1.6;
+    box-sizing: border-box;
+}
+
+view, text, image, button, input, scroll-view {
+    box-sizing: border-box;
+}
+
+button {
+    font-family: inherit;
+}
+
+button::after {
+    border: none;
+}
+
+/* ---------- 通用布局 ---------- */
+.page {
+    min-height: 100vh;
+    padding: 0 24rpx 40rpx;
+    box-sizing: border-box;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ---------- 卡片 ---------- */
+.card {
+    background: #ffffff;
+    border-radius: 20rpx;
+    margin-top: 20rpx;
+    padding: 24rpx;
+    box-shadow: 0 4rpx 16rpx rgba(30, 111, 255, 0.04);
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    margin: 28rpx 4rpx 8rpx;
+    font-size: 32rpx;
+    font-weight: 600;
+}
+
+.section-title::before {
+    content: '';
+    width: 8rpx;
+    height: 30rpx;
+    border-radius: 4rpx;
+    background: #1e6fff;
+    margin-right: 12rpx;
+}
+
+/* ---------- 价格 ---------- */
+.price {
+    color: #f43f5e;
+    font-weight: 600;
+}
+
+.price-symbol {
+    font-size: 24rpx;
+}
+
+.price-num {
+    font-size: 40rpx;
+}
+
+/* ---------- 标签 ---------- */
+.tag {
+    display: inline-block;
+    font-size: 20rpx;
+    padding: 2rpx 12rpx;
+    border-radius: 8rpx;
+    margin-right: 8rpx;
+    background: rgba(30, 111, 255, 0.08);
+    color: #1e6fff;
+}
+
+.tag-orange {
+    background: rgba(249, 115, 22, 0.12);
+    color: #f97316;
+}
+
+.tag-red {
+    background: rgba(244, 63, 94, 0.1);
+    color: #f43f5e;
+}
+
+/* ---------- 按钮 ---------- */
+.btn {
+    border-radius: 44rpx;
+    font-size: 28rpx;
+    padding: 0 40rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    text-align: center;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #1e6fff, #4d8dff);
+    color: #ffffff;
+}
+
+.btn-outline {
+    border: 2rpx solid #1e6fff;
+    color: #1e6fff;
+    background: transparent;
+}
+
+.btn-gray {
+    background: #f1f2f4;
+    color: #666666;
+}
+
+.btn-disabled {
+    background: #c9d4e8 !important;
+    color: #ffffff !important;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+}
+
+.btn-mini {
+    display: inline-block;
+    height: 56rpx;
+    line-height: 52rpx;
+    font-size: 24rpx;
+    padding: 0 28rpx;
+    border-radius: 28rpx;
+}
+
+/* ---------- 空状态 ---------- */
+.empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 120rpx 0 80rpx;
+    color: #b0b6bf;
+}
+
+.empty-icon {
+    font-size: 96rpx;
+    margin-bottom: 20rpx;
+}
+
+.empty-text {
+    font-size: 26rpx;
+    color: #b0b6bf;
+}
+
+/* ---------- 渐变商品占位图 ---------- */
+.pic-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16rpx;
+    background: linear-gradient(135deg, #3b82f6, #1e40af);
+    color: #ffffff;
+}
+
+/* ---------- 分割线 ---------- */
+.divider {
+    height: 1rpx;
+    background: #f0f1f3;
+    margin: 20rpx 0;
+}
+
+/* ---------- 底部安全区 ---------- */
+.safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+}
+

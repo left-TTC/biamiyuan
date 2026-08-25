@@ -1,0 +1,79 @@
+<!-- pages/withdraw/withdraw.wxml -->
+<navigation-bar title="余额提现" back="{{true}}" color="black" background="#F5F6FA"></navigation-bar>
+
+<scroll-view class="scrollarea" scroll-y>
+    <view class="page">
+        <!-- 余额 -->
+        <view class="balance-card">
+            <view class="balance-label">可提现余额（元）</view>
+            <view class="balance-num">¥{{balance}}</view>
+            <view class="balance-ops">
+                <text class="balance-tip">单笔最低提现 ¥{{minAmount}}</text>
+                <text class="all-in" bindtap="allIn">全部提现</text>
+            </view>
+        </view>
+
+        <!-- 提现表单 -->
+        <view class="card form-card">
+            <view class="form-row">
+                <text class="form-label">提现金额</text>
+                <view class="amount-input-wrap">
+                    <text class="amount-symbol">¥</text>
+                    <input class="amount-input" type="digit" placeholder="请输入金额" value="{{amount}}" bindinput="onAmount" />
+                </view>
+            </view>
+            <view class="form-row">
+                <text class="form-label">提现方式</text>
+            </view>
+            <view class="method-list">
+                <view
+                    class="method-item {{method === item.key ? 'active' : ''}}"
+                    wx:for="{{methods}}"
+                    wx:key="key"
+                    bindtap="selectMethod"
+                    data-key="{{item.key}}"
+                >
+                    <text class="method-icon">{{item.icon}}</text>
+                    <text class="method-label">{{item.label}}</text>
+                    <view class="method-radio">
+                        <text wx:if="{{method === item.key}}">✓</text>
+                    </view>
+                </view>
+            </view>
+            <view class="form-row">
+                <text class="form-label">收款账户</text>
+                <input class="form-input" placeholder="请输入收款账号（演示）" value="{{account}}" bindinput="onAccount" />
+            </view>
+        </view>
+
+        <button class="btn btn-primary btn-block submit-btn" bindtap="submit">确认提现</button>
+
+        <!-- 规则 -->
+        <view class="card rule-card">
+            <view class="rule-title">📋 提现说明</view>
+            <view class="rule-item">1. 邀请好友下单获得的佣金进入可提现余额</view>
+            <view class="rule-item">2. 单笔最低提现 ¥{{minAmount}}，提交后由后台审核打款</view>
+            <view class="rule-item">3. 提现绑定企业银行卡号，由服务器统一处理</view>
+        </view>
+
+        <!-- 提现记录 -->
+        <view class="card">
+            <view class="list-title">提现记录</view>
+            <view class="record-item" wx:for="{{records}}" wx:key="id">
+                <view class="record-left">
+                    <view class="record-title">{{item.methodText}}</view>
+                    <view class="record-sub">{{item.timeText}} · {{item.amountText}}</view>
+                </view>
+                <view class="record-right">
+                    <view class="record-amount">¥{{item.amountText}}</view>
+                    <view class="record-status status-{{item.status}}">{{item.statusText}}</view>
+                </view>
+            </view>
+
+            <view wx:if="{{!records.length}}" class="empty">
+                <view class="empty-icon">💳</view>
+                <view class="empty-text">暂无提现记录</view>
+            </view>
+        </view>
+    </view>
+</scroll-view>

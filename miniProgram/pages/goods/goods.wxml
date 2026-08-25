@@ -1,0 +1,122 @@
+<!-- pages/goods/goods.wxml -->
+<navigation-bar title="商品详情" back="{{true}}" color="black" background="#F5F6FA"></navigation-bar>
+
+<scroll-view class="scrollarea" scroll-y>
+    <view wx:if="{{goods}}">
+        <!-- 商品图（多图翻动，第一张为头像） -->
+        <swiper wx:if="{{goods.images.length}}" class="hero-swiper" indicator-dots circular>
+            <swiper-item wx:for="{{goods.images}}" wx:key="*this">
+                <image class="hero-img" src="{{item}}" mode="aspectFill" />
+            </swiper-item>
+        </swiper>
+        <view wx:else class="hero" style="background: linear-gradient(135deg, {{goods.colors[0]}}, {{goods.colors[1]}});">
+            <text class="hero-emoji">{{goods.emoji}}</text>
+        </view>
+
+        <!-- 价格信息 -->
+        <view class="card price-card">
+            <view class="price-row">
+                <view class="price">
+                    <text class="price-symbol">¥</text>
+                    <text class="price-num">{{goods.price}}</text>
+                    <text class="price-original">¥{{goods.originalPrice}}</text>
+                </view>
+                <text class="sales">已售 {{goods.sales}} 件</text>
+            </view>
+            <view class="goods-name">{{goods.name}}</view>
+            <view class="goods-desc">{{goods.desc}}</view>
+            <view class="tag-row">
+                <text class="tag" wx:for="{{goods.tags}}" wx:key="*this">{{item}}</text>
+                <text wx:if="{{goods.service}}" class="tag tag-service">🛠 服务类</text>
+            </view>
+            <view wx:if="{{goods.service && goods.sourceTeam}}" class="source-team">服务来源：{{goods.sourceTeam}}</view>
+        </view>
+
+        <!-- 商品详情 -->
+        <view class="section-title">商品详情</view>
+        <view class="card detail-card">
+            <view class="detail-item" wx:for="{{goods.detail}}" wx:key="index">
+                <text class="detail-dot">•</text>
+                <text class="detail-text">{{item}}</text>
+            </view>
+        </view>
+
+        <!-- 邀请赚佣提示 -->
+        <view class="card tip-card">
+            <text class="tip-icon">🤝</text>
+            <view class="flex-1">
+                <view class="tip-title">邀请好友购买</view>
+                <view class="tip-sub">好友通过你的邀请下单，可得 {{rateText}} 佣金</view>
+            </view>
+        </view>
+    </view>
+</scroll-view>
+
+<!-- 底部操作栏 -->
+<view class="footer safe-bottom">
+    <view class="footer-icon-wrap" bindtap="goCart">
+        <view class="footer-icon">🛒</view>
+        <view wx:if="{{cartCount}}" class="cart-badge">{{cartCount}}</view>
+        <text class="footer-label">购物车</text>
+    </view>
+    <view class="footer-icon-wrap" bindtap="contactSupport">
+        <view class="footer-icon">💬</view>
+        <text class="footer-label">客服</text>
+    </view>
+    <button class="btn btn-outline add-btn" bindtap="openPopup">加入购物车</button>
+    <button class="btn btn-primary buy-btn" bindtap="openPopup">立即购买</button>
+</view>
+
+<!-- 数量选择弹层 -->
+<view wx:if="{{showPopup}}" class="mask" bindtap="closePopup">
+    <view class="popup" catchtap="noop">
+        <view class="popup-header">
+            <view class="popup-title">选择数量</view>
+            <view class="popup-close" bindtap="closePopup">✕</view>
+        </view>
+        <view class="popup-goods">
+            <view class="popup-pic" style="background: linear-gradient(135deg, {{goods.colors[0]}}, {{goods.colors[1]}});">
+                <text>{{goods.emoji}}</text>
+            </view>
+            <view class="popup-info">
+                <view class="popup-name">{{goods.name}}</view>
+                <view class="price">
+                    <text class="price-symbol">¥</text>
+                    <text class="price-num">{{goods.price}}</text>
+                </view>
+            </view>
+        </view>
+        <!-- 属性选择（商品创建者定义的内置属性） -->
+        <view wx:if="{{goods.attributes.length}}" class="attr-section">
+            <view class="attr-group" wx:for="{{goods.attributes}}" wx:for-item="attr" wx:for-index="attrIndex" wx:key="name">
+                <view class="attr-label">{{attr.name}}</view>
+                <view class="attr-options">
+                    <view
+                        wx:for="{{attr.values}}"
+                        wx:for-item="val"
+                        wx:key="*this"
+                        class="attr-chip {{selectedAttrs[attr.name] === val ? 'on' : ''}}"
+                        bindtap="onAttrSelect"
+                        data-attr="{{attr.name}}"
+                        data-value="{{val}}"
+                    >{{val}}</view>
+                </view>
+            </view>
+            <view wx:if="{{!attrsReady}}" class="attr-tip">请选择{{selectedAttrsText ? '其余' : ''}}属性</view>
+            <view wx:else class="attr-tip attr-ok">已选：{{selectedAttrsText}}</view>
+        </view>
+
+        <view class="count-row">
+            <text class="count-label">购买数量</text>
+            <view class="stepper">
+                <view class="step-btn" bindtap="minusCount">−</view>
+                <view class="step-num">{{count}}</view>
+                <view class="step-btn" bindtap="addCount">+</view>
+            </view>
+        </view>
+        <view class="popup-btns">
+            <button class="btn btn-outline popup-btn" bindtap="addToCart">加入购物车</button>
+            <button class="btn btn-primary popup-btn" bindtap="buyNow">立即购买</button>
+        </view>
+    </view>
+</view>

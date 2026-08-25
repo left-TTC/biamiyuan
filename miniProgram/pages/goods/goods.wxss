@@ -1,0 +1,351 @@
+/* pages/goods/goods.wxss */
+page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #f5f6fa;
+}
+
+.scrollarea {
+    flex: 1;
+    overflow-y: auto;
+}
+
+/* 商品大图 */
+.hero {
+    height: 560rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-emoji {
+    font-size: 240rpx;
+}
+
+/* 商品多图轮播 */
+.hero-swiper {
+    height: 560rpx;
+}
+
+.hero-img {
+    width: 100%;
+    height: 100%;
+}
+
+/* 价格卡片 */
+.price-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.price-original {
+    margin-left: 16rpx;
+    font-size: 24rpx;
+    color: #b0b6bf;
+    text-decoration: line-through;
+    font-weight: 400;
+}
+
+.sales {
+    font-size: 24rpx;
+    color: #9aa1ab;
+}
+
+.goods-name {
+    margin-top: 16rpx;
+    font-size: 36rpx;
+    font-weight: 700;
+    color: #1f2329;
+}
+
+.goods-desc {
+    margin-top: 8rpx;
+    font-size: 26rpx;
+    color: #6b7280;
+}
+
+.tag-row {
+    margin-top: 16rpx;
+}
+
+/* 详情 */
+.detail-item {
+    display: flex;
+    margin-bottom: 16rpx;
+}
+
+.detail-dot {
+    color: #1e6fff;
+    margin-right: 12rpx;
+    font-weight: 700;
+}
+
+.detail-text {
+    font-size: 26rpx;
+    color: #4b5563;
+}
+
+/* 邀请提示 */
+.tip-card {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, #eef4ff, #f5f9ff);
+}
+
+.tip-icon {
+    font-size: 48rpx;
+    margin-right: 20rpx;
+}
+
+.tip-title {
+    font-size: 28rpx;
+    font-weight: 600;
+    color: #1e6fff;
+}
+
+.tip-sub {
+    margin-top: 4rpx;
+    font-size: 22rpx;
+    color: #6b7280;
+}
+
+/* 底部操作栏 */
+.footer {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    padding: 16rpx 24rpx;
+    box-shadow: 0 -4rpx 16rpx rgba(0, 0, 0, 0.05);
+}
+
+.footer-icon-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20rpx;
+    position: relative;
+}
+
+.footer-icon {
+    font-size: 44rpx;
+    line-height: 1;
+}
+
+.footer-label {
+    margin-top: 4rpx;
+    font-size: 20rpx;
+    color: #6b7280;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -10rpx;
+    right: -10rpx;
+    min-width: 30rpx;
+    height: 30rpx;
+    line-height: 30rpx;
+    text-align: center;
+    background: #f43f5e;
+    color: #ffffff;
+    font-size: 20rpx;
+    border-radius: 15rpx;
+    padding: 0 6rpx;
+}
+
+.add-btn {
+    flex: 1;
+    height: 76rpx;
+    line-height: 72rpx;
+}
+
+.buy-btn {
+    flex: 1;
+    height: 76rpx;
+    line-height: 76rpx;
+    margin-left: 16rpx;
+}
+
+/* 弹层 */
+.mask {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    display: flex;
+    align-items: flex-end;
+}
+
+.popup {
+    width: 100%;
+    background: #ffffff;
+    border-radius: 32rpx 32rpx 0 0;
+    padding: 32rpx 32rpx calc(32rpx + env(safe-area-inset-bottom));
+    box-sizing: border-box;
+}
+
+.popup-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24rpx;
+}
+
+.popup-title {
+    font-size: 32rpx;
+    font-weight: 600;
+}
+
+.popup-close {
+    color: #9aa1ab;
+    font-size: 32rpx;
+    padding: 8rpx;
+}
+
+.popup-goods {
+    display: flex;
+    align-items: center;
+}
+
+.popup-pic {
+    width: 160rpx;
+    height: 160rpx;
+    border-radius: 16rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 72rpx;
+    color: #ffffff;
+    flex: none;
+}
+
+.popup-info {
+    margin-left: 24rpx;
+    flex: 1;
+}
+
+.popup-name {
+    font-size: 28rpx;
+    font-weight: 600;
+    color: #1f2329;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.count-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 32rpx;
+    padding: 24rpx 0;
+    border-top: 1rpx solid #f0f1f3;
+}
+
+.count-label {
+    font-size: 28rpx;
+    color: #1f2329;
+}
+
+.stepper {
+    display: flex;
+    align-items: center;
+    background: #f5f6fa;
+    border-radius: 12rpx;
+}
+
+.step-btn {
+    width: 56rpx;
+    height: 56rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32rpx;
+    color: #4b5563;
+}
+
+.step-num {
+    min-width: 56rpx;
+    text-align: center;
+    font-size: 28rpx;
+    color: #1f2329;
+}
+
+.popup-btns {
+    display: flex;
+    margin-top: 24rpx;
+}
+
+.popup-btn {
+    flex: 1;
+}
+
+.popup-btn:last-child {
+    margin-left: 20rpx;
+}
+
+/* 属性选择 */
+.attr-section {
+    margin-top: 20rpx;
+    max-height: 40vh;
+    overflow-y: auto;
+}
+
+.attr-group {
+    margin-bottom: 20rpx;
+}
+
+.attr-label {
+    font-size: 26rpx;
+    color: #6b7280;
+    margin-bottom: 12rpx;
+}
+
+.attr-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16rpx;
+}
+
+.attr-chip {
+    padding: 12rpx 32rpx;
+    border-radius: 32rpx;
+    background: #f5f6fa;
+    color: #4b5563;
+    font-size: 26rpx;
+    border: 2rpx solid transparent;
+}
+
+.attr-chip.on {
+    background: rgba(30, 111, 255, 0.1);
+    color: #1e6fff;
+    border-color: #1e6fff;
+    font-weight: 500;
+}
+
+.attr-tip {
+    font-size: 22rpx;
+    color: #f43f5e;
+    margin-top: 8rpx;
+}
+
+.attr-tip.attr-ok {
+    color: #10b981;
+}
+
+/* 服务来源 */
+.tag-service {
+    background: rgba(14, 165, 233, 0.12);
+    color: #0ea5e9;
+}
+
+.source-team {
+    margin-top: 12rpx;
+    font-size: 24rpx;
+    color: #0ea5e9;
+}

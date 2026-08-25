@@ -1,0 +1,126 @@
+/* pages/support/support.wxss */
+.page {
+    padding: 24rpx 24rpx 60rpx;
+}
+
+.support-banner {
+    background: linear-gradient(135deg, #1e6fff, #0ea5e9);
+    border-radius: 20rpx;
+    padding: 32rpx;
+    color: #fff;
+    margin-bottom: 24rpx;
+}
+.support-banner-title {
+    font-size: 34rpx;
+    font-weight: 700;
+    margin-bottom: 10rpx;
+}
+.support-banner-sub {
+    font-size: 24rpx;
+    opacity: 0.9;
+    line-height: 1.5;
+}
+
+.support-new {
+    margin-bottom: 24rpx;
+}
+
+.support-form {
+    margin-bottom: 24rpx;
+}
+.form-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20rpx;
+}
+.form-label {
+    font-size: 26rpx;
+    color: #666;
+    margin-bottom: 10rpx;
+}
+.form-input {
+    background: #f5f6fa;
+    border-radius: 12rpx;
+    padding: 18rpx 20rpx;
+    font-size: 28rpx;
+}
+.form-textarea {
+    background: #f5f6fa;
+    border-radius: 12rpx;
+    padding: 18rpx 20rpx;
+    font-size: 28rpx;
+    min-height: 160rpx;
+}
+
+.list-title {
+    font-size: 30rpx;
+    font-weight: 600;
+    margin-bottom: 12rpx;
+}
+
+.ticket-item {
+    display: flex;
+    padding: 22rpx 0;
+    border-bottom: 1rpx solid #f0f1f5;
+}
+.ticket-item:last-child {
+    border-bottom: none;
+}
+.ticket-left {
+    flex: 1;
+    min-width: 0;
+}
+.ticket-title {
+    font-size: 29rpx;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+.ticket-sub {
+    font-size: 22rpx;
+    color: #999;
+    margin: 6rpx 0;
+}
+.ticket-last {
+    font-size: 24rpx;
+    color: #666;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.ticket-right {
+    margin-left: 16rpx;
+    display: flex;
+    align-items: center;
+}
+
+.badge-service {
+    font-size: 18rpx;
+    background: rgba(14, 165, 233, 0.12);
+    color: #0ea5e9;
+    border-radius: 6rpx;
+    padding: 2rpx 10rpx;
+    margin-left: 10rpx;
+}
+
+.status-pending {
+    font-size: 22rpx;
+    color: #d97706;
+}
+.status-done {
+    font-size: 22rpx;
+    color: #10b981;
+}
+
+.empty {
+    padding: 60rpx 0;
+    text-align: center;
+    color: #999;
+}
+.empty-icon {
+    font-size: 64rpx;
+    margin-bottom: 12rpx;
+}
+.empty-text {
+    font-size: 24rpx;
+}

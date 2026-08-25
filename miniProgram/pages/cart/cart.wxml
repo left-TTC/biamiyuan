@@ -1,0 +1,62 @@
+<!-- pages/cart/cart.wxml -->
+<navigation-bar title="购物车" back="{{false}}" color="black" background="#F5F6FA"></navigation-bar>
+
+<scroll-view class="scrollarea" scroll-y>
+    <view class="page">
+        <view wx:if="{{cart.length}}" class="cart-list">
+            <view class="cart-item" wx:for="{{cart}}" wx:key="id">
+                <view class="check {{item.checked ? 'on' : ''}}" bindtap="toggleItem" data-id="{{item.id}}">
+                    <text wx:if="{{item.checked}}">✓</text>
+                </view>
+                <view class="goods-pic" style="background: linear-gradient(135deg, {{item.colors[0]}}, {{item.colors[1]}});">
+                    <image wx:if="{{item.images.length}}" class="goods-img" src="{{item.images[0]}}" mode="aspectFill" />
+                    <text wx:else class="goods-emoji">{{item.emoji}}</text>
+                </view>
+                <view class="goods-info">
+                    <view class="goods-name">
+                        {{item.name}}
+                        <text wx:if="{{item.service}}" class="tag tag-service">服务</text>
+                    </view>
+                    <view wx:if="{{item.attrsText}}" class="goods-attrs">{{item.attrsText}}</view>
+                    <view wx:if="{{item.missingSpec}}" class="goods-attrs goods-attrs-warn">⚠️ 规格待选择，请重新加入购物车</view>
+                    <view class="goods-price-row">
+                        <view class="price">
+                            <text class="price-symbol">¥</text>
+                            <text class="price-num">{{item.price}}</text>
+                        </view>
+                        <view class="stepper">
+                            <view class="step-btn" bindtap="changeCount" data-id="{{item.id}}" data-delta="-1">−</view>
+                            <view class="step-num">{{item.count}}</view>
+                            <view class="step-btn" bindtap="changeCount" data-id="{{item.id}}" data-delta="1">+</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="remove-btn" bindtap="removeItem" data-id="{{item.id}}">✕</view>
+            </view>
+        </view>
+
+        <view wx:else class="empty">
+            <view class="empty-icon">🛒</view>
+            <view class="empty-text">购物车还是空的</view>
+            <button class="btn btn-primary btn-mini go-shop" bindtap="goShopping">去逛逛</button>
+        </view>
+    </view>
+</scroll-view>
+
+<!-- 底部结算栏 -->
+<view wx:if="{{cart.length}}" class="footer safe-bottom">
+    <view class="check-all" bindtap="toggleAll">
+        <view class="check {{allChecked ? 'on' : ''}}">
+            <text wx:if="{{allChecked}}">✓</text>
+        </view>
+        <text class="check-label">全选</text>
+    </view>
+    <view class="total">
+        <text class="total-label">合计：</text>
+        <view class="price">
+            <text class="price-symbol">¥</text>
+            <text class="price-num">{{totalPrice}}</text>
+        </view>
+    </view>
+    <button class="btn btn-primary checkout-btn" bindtap="checkout">结算({{totalCount}})</button>
+</view>

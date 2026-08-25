@@ -1,0 +1,52 @@
+<!-- pages/devices/devices.wxml -->
+<navigation-bar title="管理设备" back="{{true}}" color="black" background="#F5F6FA"></navigation-bar>
+
+<scroll-view class="scrollarea" scroll-y>
+    <view class="page">
+        <!-- 设备统计 -->
+        <view class="stat-card">
+            <view class="stat-item">
+                <view class="stat-num">{{stat.total}}</view>
+                <view class="stat-label">全部设备</view>
+            </view>
+            <view class="stat-item">
+                <view class="stat-num stat-online">{{stat.online}}</view>
+                <view class="stat-label">在线</view>
+            </view>
+            <view class="stat-item">
+                <view class="stat-num stat-alarm">{{stat.alarm}}</view>
+                <view class="stat-label">报警</view>
+            </view>
+            <view class="stat-item">
+                <view class="stat-num stat-offline">{{stat.offline}}</view>
+                <view class="stat-label">离线</view>
+            </view>
+        </view>
+
+        <!-- 设备列表 -->
+        <view class="device-card" wx:for="{{devices}}" wx:key="id" bindtap="goDevice" data-id="{{item.id}}">
+            <view class="device-icon" style="background: linear-gradient(135deg, {{item.colors[0]}}, {{item.colors[1]}});">
+                <text>{{item.icon}}</text>
+            </view>
+            <view class="device-info">
+                <view class="device-name-row">
+                    <text class="device-name">{{item.name}}</text>
+                    <text class="status-badge status-{{item.status}}">{{item.statusText}}</text>
+                </view>
+                <view class="device-sn">SN: {{item.sn}}</view>
+                <view class="device-meta">
+                    <text>🔋 {{item.battery}}%</text>
+                    <text class="device-last">活跃于 {{item.lastActiveText}}</text>
+                </view>
+            </view>
+            <text class="device-arrow">›</text>
+        </view>
+
+        <view wx:if="{{!devices.length}}" class="empty">
+            <view class="empty-icon">📟</view>
+            <view class="empty-text">还没有设备，点击下方按钮添加</view>
+        </view>
+
+        <button class="btn btn-primary btn-block add-btn" bindtap="goAdd">＋ 添加设备</button>
+    </view>
+</scroll-view>

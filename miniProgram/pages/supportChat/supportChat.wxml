@@ -1,0 +1,51 @@
+<!-- pages/supportChat/supportChat.wxml -->
+<navigation-bar title="客服会话" back="{{true}}" color="black" background="#F5F6FA"></navigation-bar>
+
+<view class="page" wx:if="{{ticket}}">
+    <!-- 会话信息 -->
+    <view class="ticket-head">
+        <view class="ticket-subject">{{ticket.subject}}</view>
+        <view class="ticket-meta">
+            {{ticket.assigneeType === 'team' ? '团队客服 · ' + ticket.sourceTeam : '官方客服'}}
+            · {{ticket.status === 'open' ? '进行中' : '已关闭'}}
+        </view>
+    </view>
+
+    <!-- 消息列表 -->
+    <scroll-view class="chat-scroll" scroll-y scroll-into-view="{{scrollIntoView}}" scroll-with-animation>
+        <view class="chat-list">
+            <view
+                class="chat-msg {{item.senderType === 'user' ? 'chat-left' : 'chat-right'}}"
+                wx:for="{{messages}}"
+                wx:key="id"
+            >
+                <view class="chat-sender">
+                    {{item.senderType === 'user' ? (isOwner ? '我' : item.senderName) : (item.senderName || '客服')}}
+                </view>
+                <view class="chat-bubble">{{item.content}}</view>
+                <view class="chat-time">{{item.timeText}}</view>
+            </view>
+            <view id="chat-bottom"></view>
+        </view>
+        <view wx:if="{{!messages.length}}" class="chat-empty">暂无消息</view>
+    </scroll-view>
+
+    <!-- 输入区 -->
+    <view class="chat-inputbar safe-bottom">
+        <input
+            class="chat-input"
+            placeholder="输入消息…"
+            value="{{input}}"
+            bindinput="onInput"
+            confirm-type="send"
+            bindconfirm="send"
+            disabled="{{ticket.status !== 'open'}}"
+        />
+        <button class="btn btn-primary chat-send" bindtap="send" disabled="{{ticket.status !== 'open'}}">发送</button>
+    </view>
+
+    <!-- 客服关闭会话 -->
+    <view wx:if="{{isAssignee && ticket.status === 'open'}}" class="close-bar">
+        <button class="btn btn-outline btn-sm" bindtap="close">关闭会话</button>
+    </view>
+</view>

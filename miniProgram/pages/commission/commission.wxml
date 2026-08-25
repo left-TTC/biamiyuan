@@ -1,0 +1,46 @@
+<!-- pages/commission/commission.wxml -->
+<navigation-bar title="佣金明细" back="{{true}}" color="black" background="#F5F6FA"></navigation-bar>
+
+<scroll-view class="scrollarea" scroll-y>
+    <view class="page">
+        <!-- 统计 -->
+        <view class="stat-card">
+            <view class="stat-row">
+                <view class="stat-item">
+                    <view class="stat-label">累计到账佣金</view>
+                    <view class="stat-num">¥{{income}}</view>
+                </view>
+                <view class="stat-item">
+                    <view class="stat-label">待结算（{{settleDays}}天）</view>
+                    <view class="stat-num stat-pending">¥{{pendingAmount}}</view>
+                </view>
+                <view class="stat-item">
+                    <view class="stat-label">可提现余额</view>
+                    <view class="stat-num stat-balance">¥{{balance}}</view>
+                </view>
+            </view>
+            <button class="btn btn-white withdraw-btn" bindtap="goWithdraw">去提现</button>
+        </view>
+
+        <!-- 明细 -->
+        <view class="card">
+            <view class="list-title">佣金明细</view>
+            <view class="record-item" wx:for="{{list}}" wx:key="id">
+                <view class="record-left">
+                    <view class="record-title">{{item.title}}</view>
+                    <view class="record-sub">
+                        <text class="record-status {{item.status}}">{{item.statusText}}</text>
+                        · {{item.timeText}}
+                    </view>
+                    <view wx:if="{{item.orderId}}" class="record-remark">订单 {{item.orderId}}</view>
+                </view>
+                <view class="record-amount {{item.status === 'cancelled' ? 'cancel' : 'plus'}}">{{item.amountText}}</view>
+            </view>
+
+            <view wx:if="{{!list.length}}" class="empty">
+                <view class="empty-icon">📈</view>
+                <view class="empty-text">暂无佣金记录，邀请好友下单可获得佣金（无理由退货期满到账）</view>
+            </view>
+        </view>
+    </view>
+</scroll-view>

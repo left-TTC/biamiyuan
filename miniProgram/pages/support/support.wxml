@@ -1,0 +1,83 @@
+<!-- pages/support/support.wxml -->
+<navigation-bar title="联系客服" back="{{true}}" color="black" background="#F5F6FA"></navigation-bar>
+
+<view class="page">
+    <view class="support-banner">
+        <view class="support-banner-title">💬 在线客服</view>
+        <view class="support-banner-sub">
+            {{productName ? '咨询商品：' + productName : '团队服务由团队指定客服回复，普通商品/官方服务由后台客服回复'}}
+        </view>
+    </view>
+
+    <!-- 新建会话 -->
+    <button class="btn btn-primary btn-block support-new" bindtap="toggleForm">
+        {{showForm ? '收起表单' : '＋ 新建会话'}}
+    </button>
+
+    <view wx:if="{{showForm}}" class="card support-form">
+        <view class="form-row">
+            <text class="form-label">问题标题</text>
+            <input class="form-input" placeholder="一句话描述问题" value="{{subject}}" bindinput="onSubject" />
+        </view>
+        <view class="form-row">
+            <text class="form-label">问题描述</text>
+            <textarea class="form-textarea" placeholder="请详细描述您遇到的问题" value="{{message}}" bindinput="onMessage" />
+        </view>
+        <button class="btn btn-primary btn-block" bindtap="submit">提交咨询</button>
+    </view>
+
+    <!-- 团队客服收件箱 -->
+    <view wx:if="{{inbox.length}}" class="card">
+        <view class="list-title">🎧 我是客服（团队分配给我）</view>
+        <view
+            class="ticket-item"
+            wx:for="{{inbox}}"
+            wx:key="id"
+            bindtap="openTicket"
+            data-id="{{item.id}}"
+        >
+            <view class="ticket-left">
+                <view class="ticket-title">
+                    {{item.subject}}
+                    <text class="badge badge-service" wx:if="{{item.service && item.sourceTeam}}">{{item.sourceTeam}}</text>
+                </view>
+                <view class="ticket-sub">{{item.userName || item.userPhone}} · {{item.timeText}}</view>
+                <view class="ticket-last">{{item.lastMessage}}</view>
+            </view>
+            <view class="ticket-right">
+                <view class="status-{{item.status === 'open' ? 'pending' : 'done'}}">{{item.statusText}}</view>
+            </view>
+        </view>
+    </view>
+
+    <!-- 我的会话 -->
+    <view class="card">
+        <view class="list-title">我的会话</view>
+        <view
+            class="ticket-item"
+            wx:for="{{tickets}}"
+            wx:key="id"
+            bindtap="openTicket"
+            data-id="{{item.id}}"
+        >
+            <view class="ticket-left">
+                <view class="ticket-title">
+                    {{item.subject}}
+                    <text class="badge badge-service" wx:if="{{item.service && item.sourceTeam}}">{{item.sourceTeam}}</text>
+                </view>
+                <view class="ticket-sub">
+                    {{item.assigneeType === 'team' ? '团队客服' : '官方客服'}} · {{item.timeText}}
+                </view>
+                <view class="ticket-last">{{item.lastMessage}}</view>
+            </view>
+            <view class="ticket-right">
+                <view class="status-{{item.status === 'open' ? 'pending' : 'done'}}">{{item.statusText}}</view>
+            </view>
+        </view>
+
+        <view wx:if="{{!tickets.length && !showForm}}" class="empty">
+            <view class="empty-icon">💬</view>
+            <view class="empty-text">暂无会话，点击上方「新建会话」开始咨询</view>
+        </view>
+    </view>
+</view>

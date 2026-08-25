@@ -1,0 +1,89 @@
+<!-- pages/category/category.wxml -->
+<navigation-bar title="商城" back="{{false}}" color="black" background="#F5F6FA"></navigation-bar>
+
+<view class="search-bar" bindtap="goSearch">
+    <image
+        class="search-icon"
+        src="/assets/icons/search.svg"
+        mode="aspectFit"
+    />
+    <text class="search-text">搜索</text>
+</view>
+
+<!-- 服务器未连接提示 -->
+<view wx:if="{{usingFallback}}" class="fallback-bar">
+    ⚠️ 当前展示内置演示数据，本地服务器未连接
+</view>
+
+<view class="cat-page">
+    <view wx:if="{{cacheError}}" class="full-empty">
+        <view class="empty-icon">⚠️</view>
+        <view class="empty-text">商品数据加载失败</view>
+        <view class="empty-tip">请确认本地服务器已启动（cd server &amp;&amp; go run main.go）</view>
+        <button class="btn btn-primary btn-mini retry-btn" bindtap="retry">重新加载</button>
+    </view>
+    
+    <block wx:else>
+        <scroll-view class="left" scroll-y>
+            <view
+                class="left-item {{activeIndex === index ? 'active' : ''}}"
+                wx:for="{{categories}}"
+                wx:key="id"
+                bindtap="selectCategory"
+                data-id="{{item.id}}"
+                data-index="{{index}}"
+            >
+                <view class="left-text">{{item.name}}</view>
+            </view>
+        </scroll-view>
+
+        <!-- 右侧：二级类目 + 商品 -->
+        <scroll-view class="right" scroll-y>
+            <!-- 二级类目标签 -->
+            <scroll-view class="sub-scroll" scroll-x enhanced show-scrollbar="{{false}}">
+                <view class="sub-tabs">
+                    <view
+                        class="sub-tab {{subActiveIndex === index ? 'active' : ''}}"
+                        wx:for="{{subCats}}"
+                        wx:key="id"
+                        bindtap="selectSubCategory"
+                        data-id="{{item.id}}"
+                        data-index="{{index}}"
+                    >{{item.name}}</view>
+                </view>
+            </scroll-view>
+
+            <view class="right-header">
+                <view class="right-title">{{currentSub.name}}</view>
+            </view>
+
+            <view class="goods-list">
+                <view class="goods-item" wx:for="{{products}}" wx:key="id" bindtap="goGoods" data-id="{{item.id}}">
+                    <view class="goods-pic" style="background: linear-gradient(135deg, {{item.colors[0]}}, {{item.colors[1]}});">
+                        <image wx:if="{{item.images.length}}" class="goods-img" src="{{item.images[0]}}" mode="aspectFill" />
+                        <text wx:else class="goods-emoji">{{item.emoji}}</text>
+                    </view>
+                    <view class="goods-info">
+                        <view class="goods-name">
+                            {{item.name}}
+                            <text wx:if="{{item.service}}" class="tag tag-service">服务</text>
+                        </view>
+                        <view class="goods-desc">{{item.desc}}</view>
+                        <view wx:if="{{item.service && item.sourceTeam}}" class="goods-source">来源：{{item.sourceTeam}}</view>
+                        <view class="goods-foot">
+                            <view class="price">
+                                <text class="price-symbol">¥</text>
+                                <text class="price-num">{{item.price}}</text>
+                            </view>
+                            <text class="goods-sales">已售{{item.sales}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view wx:if="{{!products.length}}" class="empty">
+                <view class="empty-icon">📦</view>
+                <view class="empty-text">该分类暂无商品</view>
+            </view>
+        </scroll-view>
+    </block>
+</view>

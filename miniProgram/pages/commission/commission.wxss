@@ -1,0 +1,140 @@
+/* pages/commission/commission.wxss */
+page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #f5f6fa;
+}
+
+.scrollarea {
+    flex: 1;
+    overflow-y: auto;
+}
+
+/* 统计卡片 */
+.stat-card {
+    margin-top: 20rpx;
+    border-radius: 24rpx;
+    padding: 36rpx 24rpx 28rpx;
+    background: linear-gradient(135deg, #1e6fff, #4d8dff);
+    color: #ffffff;
+}
+
+.stat-row {
+    display: flex;
+}
+
+.stat-item {
+    flex: 1;
+}
+
+.stat-label {
+    font-size: 22rpx;
+    opacity: 0.85;
+}
+
+.stat-num {
+    margin-top: 10rpx;
+    font-size: 34rpx;
+    font-weight: 700;
+}
+
+.stat-balance {
+    font-size: 40rpx;
+}
+
+.withdraw-btn {
+    margin-top: 28rpx;
+    background: #ffffff;
+    color: #1e6fff;
+    height: 72rpx;
+    line-height: 72rpx;
+    border-radius: 40rpx;
+    font-size: 28rpx;
+    font-weight: 600;
+}
+
+/* 明细 */
+.list-title {
+    font-size: 28rpx;
+    font-weight: 600;
+    color: #1f2329;
+    padding-bottom: 16rpx;
+    border-bottom: 1rpx solid #f0f1f3;
+}
+
+.record-item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 24rpx 0;
+    border-bottom: 1rpx solid #f7f8fa;
+}
+
+.record-item:last-child {
+    border-bottom: none;
+}
+
+.record-left {
+    flex: 1;
+    margin-right: 20rpx;
+}
+
+.record-title {
+    font-size: 26rpx;
+    color: #1f2329;
+    font-weight: 500;
+}
+
+.record-sub {
+    margin-top: 6rpx;
+    font-size: 22rpx;
+    color: #b0b6bf;
+}
+
+.record-remark {
+    margin-top: 6rpx;
+    font-size: 22rpx;
+    color: #9aa1ab;
+}
+
+.record-amount {
+    font-size: 30rpx;
+    font-weight: 700;
+}
+
+.plus {
+    color: #f43f5e;
+}
+
+.minus {
+    color: #6b7280;
+}
+
+/* 佣金状态 */
+.stat-pending {
+    color: #f59e0b;
+}
+.record-status {
+    display: inline-block;
+    padding: 2rpx 12rpx;
+    border-radius: 8rpx;
+    font-size: 22rpx;
+    margin-right: 8rpx;
+}
+.record-status.pending {
+    background: #fef3c7;
+    color: #b45309;
+}
+.record-status.settled {
+    background: #dcfce7;
+    color: #15803d;
+}
+.record-status.cancelled {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+.record-amount.cancel {
+    color: #9ca3af;
+    text-decoration: line-through;
+}

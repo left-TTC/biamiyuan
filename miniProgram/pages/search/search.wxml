@@ -1,0 +1,99 @@
+<!-- pages/search/search.wxml -->
+<navigation-bar title="搜索" back="{{true}}" color="black" background="#F5F6FA"></navigation-bar>
+
+<view class="search-page">
+    <!-- 顶部搜索框 -->
+    <view class="search-head">
+        <view class="search-box">
+            <text class="s-icon">🔍</text>
+            <input
+                class="s-input"
+                placeholder="搜索安全监护产品"
+                value="{{keyword}}"
+                bindinput="onInput"
+                bindconfirm="onConfirm"
+                confirm-type="search"
+                focus
+            />
+            <text wx:if="{{keyword}}" class="s-clear" bindtap="clearKeyword">✕</text>
+        </view>
+        <text class="s-btn" bindtap="onSearch">搜索</text>
+    </view>
+
+    <!-- 输入联想 -->
+    <view wx:if="{{showSuggest}}" class="suggest-list">
+        <view class="suggest-item" wx:for="{{suggestions}}" wx:key="*this" bindtap="tapSuggest" data-word="{{item}}">
+            <text class="suggest-icon">🔍</text>
+            <text class="suggest-word">{{item}}</text>
+        </view>
+    </view>
+
+    <!-- 搜索前：历史 + 热门 -->
+    <scroll-view wx:elif="{{!searched}}" class="scrollarea" scroll-y>
+        <view class="page">
+            <view wx:if="{{history.length}}" class="history-block">
+                <view class="block-head">
+                    <text class="block-title">搜索历史</text>
+                    <text class="block-action" bindtap="clearHistory">🗑 清空</text>
+                </view>
+                <view class="tag-wrap">
+                    <view class="h-tag" wx:for="{{history}}" wx:key="*this" bindtap="tapHistory" data-word="{{item}}">
+                        <text>{{item}}</text>
+                        <text class="h-del" catchtap="removeHistory" data-word="{{item}}">✕</text>
+                    </view>
+                </view>
+            </view>
+
+            <view class="block-head hot-head">
+                <text class="block-title">热门搜索</text>
+            </view>
+            <view class="tag-wrap">
+                <text class="hot-tag" wx:for="{{hotWords}}" wx:key="*this" bindtap="tapHot" data-word="{{item}}">{{item}}</text>
+            </view>
+        </view>
+    </scroll-view>
+
+    <!-- 搜索结果 -->
+    <block wx:else>
+        <view class="result-head">
+            <text class="result-count">共 {{results.length}} 件商品</text>
+            <view class="sort-tabs">
+                <view class="sort-tab {{sortKey === 'default' ? 'active' : ''}}" bindtap="changeSort" data-key="default">综合</view>
+                <view class="sort-tab {{sortKey === 'sales' ? 'active' : ''}}" bindtap="changeSort" data-key="sales">销量</view>
+                <view class="sort-tab {{sortKey === 'price' ? 'active' : ''}}" bindtap="changeSort" data-key="price">
+                    <text>价格</text>
+                    <text class="sort-arrow">{{sortKey === 'price' ? (priceAsc ? '↑' : '↓') : '⇅'}}</text>
+                </view>
+            </view>
+        </view>
+
+        <scroll-view class="scrollarea" scroll-y>
+            <view class="page">
+                <view class="goods-grid">
+                    <view class="goods-card" wx:for="{{sortedResults}}" wx:key="id" bindtap="goGoods" data-id="{{item.id}}">
+                        <view class="goods-pic" style="background: linear-gradient(135deg, {{item.colors[0]}}, {{item.colors[1]}});">
+                            <image wx:if="{{item.images.length}}" class="goods-img" src="{{item.images[0]}}" mode="aspectFill" />
+                            <text wx:else class="goods-emoji">{{item.emoji}}</text>
+                        </view>
+                        <view class="goods-info">
+                            <view class="goods-name">{{item.name}}</view>
+                            <view class="goods-desc">{{item.desc}}</view>
+                            <view class="goods-foot">
+                                <view class="price">
+                                    <text class="price-symbol">¥</text>
+                                    <text class="price-num">{{item.price}}</text>
+                                </view>
+                                <text class="goods-sales">已售{{item.sales}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view wx:if="{{!sortedResults.length}}" class="empty">
+                    <view class="empty-icon">🔍</view>
+                    <view class="empty-text">没有找到相关商品，换个关键词试试</view>
+                </view>
+            </view>
+        </scroll-view>
+    </block>
+</view>
+

@@ -1,0 +1,92 @@
+<!-- pages/orderDetail/orderDetail.wxml -->
+<navigation-bar title="订单详情" back="{{true}}" color="black" background="#F5F6FA"></navigation-bar>
+
+<scroll-view class="scrollarea" scroll-y>
+    <view class="page" wx:if="{{order}}">
+        <!-- 状态头部 -->
+        <view class="status-card status-{{order.status}}">
+            <view class="status-emoji">{{statusEmoji}}</view>
+            <view class="status-info">
+                <view class="status-title">{{statusText}}</view>
+                <view class="status-desc">{{statusDesc}}</view>
+            </view>
+        </view>
+
+        <!-- 收货地址 -->
+        <view class="card addr-card" wx:if="{{order.address}}">
+            <view class="addr-icon">📍</view>
+            <view class="flex-1">
+                <view class="addr-line1">
+                    <text class="addr-name">{{order.address.name}}</text>
+                    <text class="addr-phone">{{order.address.phone}}</text>
+                </view>
+                <view class="addr-detail">{{order.address.region}} {{order.address.detail}}</view>
+            </view>
+        </view>
+
+        <!-- 商品清单 -->
+        <view class="card">
+            <view class="goods-row" wx:for="{{order.items}}" wx:key="id">
+                <view class="goods-pic" style="background: linear-gradient(135deg, {{item.colors[0]}}, {{item.colors[1]}});">
+                    <image wx:if="{{item.images.length}}" class="goods-img" src="{{item.images[0]}}" mode="aspectFill" />
+                    <text wx:else class="goods-emoji">{{item.emoji}}</text>
+                </view>
+                <view class="goods-info">
+                    <view class="goods-name">
+                        {{item.name}}
+                        <text wx:if="{{item.service}}" class="tag tag-service">服务</text>
+                    </view>
+                    <view wx:if="{{item.attrsText}}" class="goods-attrs">{{item.attrsText}}</view>
+                    <view wx:if="{{item.service && item.sourceTeam}}" class="goods-attrs">来源：{{item.sourceTeam}}</view>
+                    <view class="goods-foot">
+                        <view class="price">
+                            <text class="price-symbol">¥</text>
+                            <text class="price-num">{{item.price}}</text>
+                        </view>
+                        <text class="goods-count">×{{item.count}}</text>
+                    </view>
+                </view>
+            </view>
+            <view class="total-line">
+                <text>共 {{order.items.length}} 件商品，实付款</text>
+                <view class="price">
+                    <text class="price-symbol">¥</text>
+                    <text class="price-num">{{order.total}}</text>
+                </view>
+            </view>
+        </view>
+
+        <!-- 订单信息 -->
+        <view class="card info-card">
+            <view class="info-row"><text class="info-label">订单编号</text><text class="info-value">{{order.orderNo}}</text></view>
+            <view class="info-row"><text class="info-label">下单时间</text><text class="info-value">{{timeText}}</text></view>
+            <view class="info-row" wx:if="{{payTimeText}}"><text class="info-label">支付时间</text><text class="info-value">{{payTimeText}}</text></view>
+            <view class="info-row" wx:if="{{shipText}}"><text class="info-label">物流信息</text><text class="info-value">{{shipText}}</text></view>
+            <view class="info-row" wx:if="{{order.remark}}"><text class="info-label">订单备注</text><text class="info-value">{{order.remark}}</text></view>
+        </view>
+
+        <!-- 邀请提示 -->
+        <view class="card invite-tip">🤝 把商品分享给好友，好友下单后可得佣金</view>
+    </view>
+</scroll-view>
+
+<!-- 底部操作 -->
+<view class="footer safe-bottom">
+    <view wx:if="{{canCancel}}" class="footer-btns">
+        <button class="btn btn-outline footer-btn" bindtap="contactSupport">联系客服</button>
+        <button class="btn btn-outline footer-btn" bindtap="cancel">取消订单</button>
+        <button class="btn btn-primary footer-btn" bindtap="pay">去支付</button>
+    </view>
+    <view wx:elif="{{canRefund}}" class="footer-btns">
+        <button class="btn btn-outline footer-btn" bindtap="contactSupport">联系客服</button>
+        <button class="btn btn-outline footer-btn refund-btn" bindtap="refund">申请退款</button>
+    </view>
+    <view wx:elif="{{canConfirm}}" class="footer-btns">
+        <button class="btn btn-primary footer-btn confirm-btn" bindtap="confirmReceive">确认收货</button>
+    </view>
+    <view wx:else class="footer-btns">
+        <button class="btn btn-outline footer-btn" bindtap="contactSupport">联系客服</button>
+        <button class="btn btn-outline footer-btn" bindtap="goHome">返回首页</button>
+        <button class="btn btn-gray footer-btn" bindtap="goHome">再次购买</button>
+    </view>
+</view>

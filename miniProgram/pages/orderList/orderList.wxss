@@ -1,0 +1,170 @@
+/* pages/orderList/orderList.wxss */
+page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #f5f6fa;
+}
+
+/* Tab 切换栏 */
+.tabs {
+    display: flex;
+    background: #ffffff;
+    padding: 0 8rpx;
+    box-shadow: 0 4rpx 16rpx rgba(30, 111, 255, 0.04);
+    flex: none;
+}
+
+.tab {
+    flex: 1;
+    text-align: center;
+    font-size: 28rpx;
+    color: #6b7280;
+    padding: 22rpx 0;
+    position: relative;
+}
+
+.tab.active {
+    color: #1e6fff;
+    font-weight: 600;
+}
+
+.tab.active::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 6rpx;
+    width: 48rpx;
+    height: 6rpx;
+    border-radius: 3rpx;
+    background: #1e6fff;
+}
+
+.scrollarea {
+    flex: 1;
+    overflow-y: auto;
+}
+
+/* 订单卡片 */
+.order-card {
+    background: #ffffff;
+    border-radius: 20rpx;
+    padding: 24rpx;
+    margin-bottom: 20rpx;
+}
+
+.order-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 20rpx;
+    border-bottom: 1rpx solid #f0f1f3;
+}
+
+.order-no {
+    font-size: 24rpx;
+    color: #9aa1ab;
+}
+
+.order-status {
+    font-size: 26rpx;
+    font-weight: 600;
+}
+
+.status-pending {
+    color: #f97316;
+}
+
+.status-paid {
+    color: #1e6fff;
+}
+
+.status-shipped {
+    color: #8b5cf6;
+}
+
+.status-done {
+    color: #10b981;
+}
+
+.status-canceled {
+    color: #b0b6bf;
+}
+
+.order-goods {
+    padding: 20rpx 0;
+}
+
+.goods-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16rpx;
+}
+
+.goods-row:last-child {
+    margin-bottom: 0;
+}
+
+.goods-pic {
+    width: 110rpx;
+    height: 110rpx;
+    flex: none;
+    border-radius: 14rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.goods-emoji {
+    font-size: 52rpx;
+}
+
+.goods-img {
+    width: 100%;
+    height: 100%;
+}
+
+.goods-info {
+    flex: 1;
+    margin-left: 20rpx;
+}
+
+.goods-name {
+    font-size: 26rpx;
+    font-weight: 500;
+    color: #1f2329;
+}
+
+.goods-sub {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8rpx;
+    font-size: 24rpx;
+    color: #6b7280;
+}
+
+.order-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1rpx solid #f0f1f3;
+    padding-top: 20rpx;
+}
+
+.order-time {
+    font-size: 22rpx;
+    color: #b0b6bf;
+}
+
+.order-total {
+    display: flex;
+    align-items: baseline;
+}
+
+.order-total > text {
+    font-size: 24rpx;
+    color: #6b7280;
+    margin-right: 8rpx;
+}

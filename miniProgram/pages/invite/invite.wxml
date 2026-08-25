@@ -1,0 +1,111 @@
+<!-- pages/invite/invite.wxml -->
+<navigation-bar title="邀请好友" back="{{true}}" color="black" background="#F5F6FA"></navigation-bar>
+
+<scroll-view class="scrollarea" scroll-y>
+    <view class="page">
+        <!-- 邀请海报 -->
+        <view class="poster">
+            <view class="poster-bg"></view>
+            <view class="poster-head">
+                <view class="inviteTitle">
+                    <image class="poster-img    " src="/assets/icons/sheild.svg"></image>
+                    <view class="poster-title">百米源安全监护平台</view>
+                </view>
+                <view class="poster-sub">邀请好友 · 共享佣金</view>
+            </view>
+            <view class="poster-code">
+                <view class="code-label">我的邀请码</view>
+                <view class="code-value">{{user.promoterCode}}</view>
+                <view class="code-tip" bindtap="copyCode">点击复制</view>
+            </view>
+            <view class="poster-rule">好友通过你的邀请成为会员并下单，即可获得订单金额 {{rateText}} 的佣金（无理由退货期满到账），满 {{minAmount}} 元随时提现</view>
+        </view>
+
+        <!-- 收益统计 -->
+        <view class="stat-row">
+            <view class="stat-item" bindtap="goWithdraw">
+                <view class="stat-num">¥{{balance}}</view>
+                <view class="stat-label">可提现余额</view>
+            </view>
+            <view class="stat-item">
+                <view class="stat-num">{{teamCount}}</view>
+                <view class="stat-label">邀请好友</view>
+            </view>
+        </view>
+
+        <!-- 绑定邀请码 -->
+        <view class="card bind-card" wx:if="{{user && user.invitedBy}}">
+            <view class="bind-title">🎉 已接受邀请</view>
+            <view class="bind-desc">邀请人：{{user.invitedByName || '好友'}}（邀请码 {{user.invitedBy}}）</view>
+        </view>
+        <view class="card bind-card" wx:if="{{user && !user.invitedBy}}">
+            <view class="bind-title">
+                <image class="bind-img" src="/assets/icons/bind.svg"></image>
+                绑定邀请码
+            </view>
+            <view class="bind-desc">输入邀请人提供的 6 位邀请码建立邀请关系，好友下单后您可获 {{rateText}} 佣金</view>
+            <view class="bind-row">
+                <input
+                    class="bind-input"
+                    placeholder="请输入 6 位邀请码"
+                    value="{{inviterInput}}"
+                    maxlength="6"
+                    bindinput="onInviterInput"
+                />
+                <button class="btn btn-primary bind-btn" bindtap="bindInvite">绑定</button>
+            </view>
+        </view>
+
+        <!-- 转发 -->
+        <button class="btn btn-primary btn-block share-btn" open-type="share">
+            <image class="share-image" src="/assets/icons/share.svg"></image>
+            分享给微信好友
+        </button>
+
+        <!-- 我邀请的好友（与团队页职责分离，好友列表在此展示） -->
+        <view class="card invite-list-card">
+            <view class="list-title">我邀请的好友（{{teamCount}}）</view>
+            <view class="invite-member" wx:for="{{invitedMembers}}" wx:key="id">
+                <view class="invite-avatar">{{item.avatarUrl || '👤'}}</view>
+                <view class="invite-info">
+                    <view class="invite-name">{{item.nickName}}</view>
+                    <view class="invite-sub">累计消费 ¥{{formatMoney(item.totalSpend)}}</view>
+                    <view wx:if="{{item.server}}" class="invite-sub invite-sub-commission">
+                        为我带来佣金 ¥{{formatMoney(item.commission)}}<block wx:if="{{item.pendingCommission > 0}}">（待结算 ¥{{formatMoney(item.pendingCommission)}}）</block>
+                    </view>
+                </view>
+                <view class="invite-tag" wx:if="{{item.simulated}}">模拟</view>
+            </view>
+            <view wx:if="{{!teamCount}}" class="empty">
+                <view class="empty-icon">👥</view>
+                <view class="empty-text">还没有邀请好友，分享下方链接给好友</view>
+            </view>
+        </view>
+
+        <!-- 功能入口 -->
+        <view class="card">
+            <view class="menu-item" bindtap="goCommission">
+                <image class="menu-icon" src="/assets/icons/detail.svg"></image>
+                <text class="menu-name">佣金明细</text>
+                <text class="menu-desc">收入与提现记录</text>
+                <text class="menu-arrow">›</text>
+            </view>
+            <view class="divider"></view>
+            <view class="menu-item" bindtap="goWithdraw">
+                <image class="menu-icon" src="/assets/icons/balance-o.svg"></image>
+                <text class="menu-name">余额提现</text>
+                <text class="menu-desc">最低提现 ¥{{minAmount}}</text>
+                <text class="menu-arrow">›</text>
+            </view>
+        </view>
+
+        <!-- 邀请规则 -->
+        <view class="card rule-card">
+            <view class="rule-title">📋 邀请规则</view>
+            <view class="rule-item">1. 所有会员均可邀请好友，无门槛限制</view>
+            <view class="rule-item">2. 好友通过你的邀请成为会员并下单，你可获得该笔订单 {{rateText}} 的佣金</view>
+            <view class="rule-item">3. 佣金在无理由退货期（{{settleDays}} 天）满后自动到账；期内好友退款则佣金取消</view>
+            <view class="rule-item">4. 佣金到账后满 ¥{{minAmount}} 即可提现，提交后预计 1-2 个工作日到账</view>
+        </view>
+    </view>
+</scroll-view>

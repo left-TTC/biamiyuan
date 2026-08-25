@@ -1,0 +1,390 @@
+/* pages/index/index.wxss */
+page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #f5f6fa;
+    /* 底部为自定义 tabBar 预留空间（100rpx 高度 + 安全区） */
+    box-sizing: border-box;
+    padding-bottom: calc(120rpx + env(safe-area-inset-bottom));
+}
+
+.scrollarea {
+    flex: 1;
+    overflow-y: auto;
+}
+
+/* 守护状态概览 */
+.status-card {
+    display: flex;
+    align-items: center;
+    margin-top: 20rpx;
+    padding: 32rpx 32rpx;
+    border-radius: 24rpx;
+    background: linear-gradient(135deg, #1e6fff, #4d8dff);
+    color: #ffffff;
+}
+
+.status-card.danger {
+    background: linear-gradient(135deg, #ef4444, #f97316);
+}
+
+
+.status-title {
+    display: flex;
+    align-items: center;
+}
+
+.status-icon {
+    width: 36rpx;
+    height: 36rpx;
+    margin-right: 8rpx;
+}
+
+.status-sub {
+    margin-top: 8rpx;
+    font-size: 24rpx;
+    opacity: 0.9;
+}
+
+.unread-chip {
+    flex: none;
+    background: rgba(255, 255, 255, 0.22);
+    border-radius: 28rpx;
+    font-size: 24rpx;
+    padding: 10rpx 22rpx;
+}
+
+/* 通知开关 */
+.notify-bar {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 20rpx;
+    margin-top: 20rpx;
+    padding: 24rpx 28rpx;
+}
+
+.notify-icon {
+    width: 40rpx;
+    height: 100rpx;
+    margin-right: 30rpx;
+}
+
+.notify-title {
+    font-size: 28rpx;
+    font-weight: 600;
+    color: #1f2329;
+}
+
+.empty-icon {
+    width: 100rpx;
+    height: 130rpx;
+}
+
+.notify-sub {
+    margin-top: 4rpx;
+    font-size: 22rpx;
+    color: #9aa1ab;
+}
+
+.switch {
+    flex: none;
+    width: 88rpx;
+    height: 48rpx;
+    border-radius: 24rpx;
+    background: #d0d5dd;
+    position: relative;
+    transition: all 0.2s;
+}
+
+.switch.on {
+    background: #1e6fff;
+}
+
+.switch-dot {
+    position: absolute;
+    top: 4rpx;
+    left: 4rpx;
+    width: 40rpx;
+    height: 40rpx;
+    border-radius: 50%;
+    background: #ffffff;
+    transition: all 0.2s;
+}
+
+.switch.on .switch-dot {
+    left: 44rpx;
+}
+
+/* 设备数量汇总卡 */
+.device-summary {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 20rpx;
+    padding: 28rpx;
+    margin-bottom: 8rpx;
+}
+
+.summary-main {
+    display: flex;
+    align-items: baseline;
+    margin-right: 24rpx;
+    flex: none;
+}
+
+.summary-num {
+    font-size: 56rpx;
+    font-weight: 700;
+    color: #1e6fff;
+}
+
+.summary-label {
+    margin-left: 8rpx;
+    font-size: 24rpx;
+    color: #4b5563;
+}
+
+.summary-stats {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12rpx;
+}
+
+.summary-pill {
+    font-size: 22rpx;
+    border-radius: 24rpx;
+    padding: 8rpx 20rpx;
+}
+
+.pill-online {
+    background: rgba(16, 185, 129, 0.12);
+    color: #10b981;
+}
+
+.pill-alarm {
+    background: rgba(244, 63, 94, 0.12);
+    color: #f43f5e;
+}
+
+.pill-offline {
+    background: rgba(156, 163, 175, 0.15);
+    color: #9ca3af;
+}
+
+.summary-arrow {
+    flex: none;
+    margin-left: 16rpx;
+    font-size: 26rpx;
+    color: #b0b6bf;
+}
+
+/* 统一发送警告测试按钮 */
+.alarm-test-btn {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8rpx;
+    margin-top: 20rpx;
+    padding: 28rpx;
+    border-radius: 20rpx;
+    background: linear-gradient(135deg, #ef4444, #f97316);
+    color: #ffffff;
+    box-shadow: 0 8rpx 24rpx rgba(239, 68, 68, 0.25);
+}
+
+.alarm-test-icon {
+    font-size: 48rpx;
+    margin-right: 20rpx;
+}
+
+.alarm-test-title {
+    font-size: 30rpx;
+    font-weight: 700;
+}
+
+.alarm-test-sub {
+    margin-top: 6rpx;
+    font-size: 22rpx;
+    opacity: 0.92;
+}
+
+.alarm-test-action {
+    flex: none;
+    font-size: 26rpx;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 30rpx;
+    padding: 12rpx 26rpx;
+}
+
+.alarm-test-action.sending {
+    opacity: 0.7;
+}
+
+/* 设备消息 */
+.section-unread {
+    margin-left: auto;
+    font-size: 22rpx;
+    color: #f43f5e;
+    font-weight: 400;
+}
+
+.msg-card {
+    display: flex;
+    background: #ffffff;
+    border-radius: 20rpx;
+    padding: 24rpx;
+    margin-bottom: 20rpx;
+}
+
+.msg-icon {
+    width: 80rpx;
+    height: 80rpx;
+    flex: none;
+    border-radius: 20rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40rpx;
+}
+
+.msg-alarm {
+    background: rgba(244, 63, 94, 0.12);
+}
+
+.msg-status {
+    background: rgba(245, 158, 11, 0.14);
+}
+
+.msg-info {
+    margin-left: 20rpx;
+    flex: 1;
+    min-width: 0;
+}
+
+.msg-title-row {
+    display: flex;
+    align-items: center;
+}
+
+.msg-title {
+    font-size: 28rpx;
+    font-weight: 600;
+    color: #1f2329;
+}
+
+.unread-dot {
+    width: 14rpx;
+    height: 14rpx;
+    border-radius: 50%;
+    background: #f43f5e;
+    margin-left: 12rpx;
+}
+
+.msg-content {
+    margin-top: 8rpx;
+    font-size: 24rpx;
+    color: #6b7280;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.msg-time {
+    margin-top: 8rpx;
+    font-size: 20rpx;
+    color: #b0b6bf;
+}
+
+/* 未登录：登录引导 */
+.login-prompt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20rpx;
+    padding: 56rpx 32rpx;
+    border-radius: 24rpx;
+    background: linear-gradient(135deg, #1e6fff, #4d8dff);
+    color: #ffffff;
+    box-shadow: 0 8rpx 24rpx rgba(30, 111, 255, 0.25);
+}
+
+.login-prompt-icon {
+    width: 72rpx;
+    height: 90rpx;
+}
+
+.login-prompt-title {
+    font-size: 34rpx;
+    font-weight: 700;
+}
+
+.login-prompt-sub {
+    margin-top: 10rpx;
+    font-size: 24rpx;
+    opacity: 0.9;
+    text-align: center;
+}
+
+.login-prompt-btn {
+    margin-top: 32rpx;
+    background: #ffffff;
+    color: #1e6fff;
+    height: 76rpx;
+    line-height: 76rpx;
+    font-size: 28rpx;
+    font-weight: 600;
+    border-radius: 38rpx;
+    padding: 0 56rpx;
+}
+
+/* 商城入口 */
+.mall-entry {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 20rpx;
+    margin-top: 30rpx;
+    padding: 28rpx;
+}
+
+.mall-icon {
+    font-size: 48rpx;
+    margin-right: 20rpx;
+}
+
+.mall-title {
+    font-size: 28rpx;
+    font-weight: 600;
+    color: #1f2329;
+}
+
+.mall-sub {
+    margin-top: 4rpx;
+    font-size: 22rpx;
+    color: #9aa1ab;
+}
+
+.mall-ops {
+    display: flex;
+    align-items: center;
+}
+
+.mall-invite {
+    font-size: 24rpx;
+    color: #1e6fff;
+    border: 1rpx solid #1e6fff;
+    border-radius: 26rpx;
+    padding: 6rpx 20rpx;
+    margin-right: 20rpx;
+}
+
+.mall-arrow {
+    font-size: 26rpx;
+    color: #b0b6bf;
+}
+
+

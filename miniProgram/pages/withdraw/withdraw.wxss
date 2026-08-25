@@ -1,0 +1,236 @@
+/* pages/withdraw/withdraw.wxss */
+page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #f5f6fa;
+}
+
+.scrollarea {
+    flex: 1;
+    overflow-y: auto;
+}
+
+/* 余额 */
+.balance-card {
+    margin-top: 20rpx;
+    border-radius: 24rpx;
+    padding: 40rpx 32rpx;
+    background: linear-gradient(135deg, #1e6fff, #4d8dff);
+    color: #ffffff;
+}
+
+.balance-label {
+    font-size: 24rpx;
+    opacity: 0.85;
+}
+
+.balance-num {
+    margin-top: 12rpx;
+    font-size: 72rpx;
+    font-weight: 700;
+}
+
+.balance-ops {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16rpx;
+}
+
+.balance-tip {
+    font-size: 22rpx;
+    opacity: 0.85;
+}
+
+.all-in {
+    font-size: 24rpx;
+    padding: 8rpx 20rpx;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 28rpx;
+}
+
+/* 表单 */
+.form-card {
+    margin-top: 20rpx;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    padding: 24rpx 0;
+}
+
+.form-label {
+    width: 180rpx;
+    font-size: 28rpx;
+    color: #1f2329;
+    flex: none;
+}
+
+.amount-input-wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    border-bottom: 2rpx solid #1e6fff;
+    padding-bottom: 8rpx;
+}
+
+.amount-symbol {
+    font-size: 36rpx;
+    font-weight: 600;
+    color: #1f2329;
+    margin-right: 8rpx;
+}
+
+.amount-input {
+    flex: 1;
+    font-size: 36rpx;
+    font-weight: 600;
+}
+
+.form-input {
+    flex: 1;
+    font-size: 28rpx;
+}
+
+/* 方式选择 */
+.method-list {
+    padding-bottom: 8rpx;
+}
+
+.method-item {
+    display: flex;
+    align-items: center;
+    padding: 22rpx 24rpx;
+    border-radius: 16rpx;
+    border: 2rpx solid #f0f1f3;
+    margin-bottom: 16rpx;
+}
+
+.method-item.active {
+    border-color: #1e6fff;
+    background: #f0f5ff;
+}
+
+.method-icon {
+    font-size: 40rpx;
+    margin-right: 16rpx;
+}
+
+.method-label {
+    flex: 1;
+    font-size: 28rpx;
+    color: #1f2329;
+}
+
+.method-radio {
+    width: 36rpx;
+    height: 36rpx;
+    border-radius: 50%;
+    border: 2rpx solid #d0d5dd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 22rpx;
+}
+
+.method-item.active .method-radio {
+    background: #1e6fff;
+    border-color: #1e6fff;
+}
+
+/* 提交 */
+.submit-btn {
+    margin-top: 32rpx;
+}
+
+/* 规则 */
+.rule-title {
+    font-size: 28rpx;
+    font-weight: 600;
+    color: #1f2329;
+    margin-bottom: 12rpx;
+}
+
+.rule-item {
+    font-size: 24rpx;
+    color: #6b7280;
+    line-height: 1.9;
+}
+
+/* 记录 */
+.list-title {
+    font-size: 28rpx;
+    font-weight: 600;
+    color: #1f2329;
+    padding-bottom: 16rpx;
+    border-bottom: 1rpx solid #f0f1f3;
+}
+
+.record-item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 24rpx 0;
+    border-bottom: 1rpx solid #f7f8fa;
+}
+
+.record-item:last-child {
+    border-bottom: none;
+}
+
+.record-left {
+    flex: 1;
+    margin-right: 20rpx;
+}
+
+.record-title {
+    font-size: 26rpx;
+    color: #1f2329;
+    font-weight: 500;
+}
+
+.record-sub {
+    margin-top: 6rpx;
+    font-size: 22rpx;
+    color: #b0b6bf;
+}
+
+.sim-btn {
+    display: inline-block;
+    margin-top: 12rpx;
+    font-size: 22rpx;
+    color: #1e6fff;
+    border: 1rpx solid #1e6fff;
+    border-radius: 24rpx;
+    padding: 4rpx 20rpx;
+}
+
+.record-right {
+    text-align: right;
+}
+
+.record-amount {
+    font-size: 30rpx;
+    font-weight: 700;
+    color: #1f2329;
+}
+
+.record-status {
+    margin-top: 6rpx;
+    font-size: 22rpx;
+}
+
+.status-processing {
+    color: #f97316;
+}
+
+.status-done {
+    color: #10b981;
+}
+
+.status-failed {
+    color: #f43f5e;
+}

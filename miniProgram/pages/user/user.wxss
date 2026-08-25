@@ -1,0 +1,234 @@
+/* pages/user/user.wxss */
+page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #f5f6fa;
+    /* 底部为自定义 tabBar 预留空间（100rpx 高度 + 安全区） */
+    box-sizing: border-box;
+    padding-bottom: calc(120rpx + env(safe-area-inset-bottom));
+}
+
+.scrollarea {
+    flex: 1;
+    overflow-y: auto;
+}
+
+/* 用户卡片 */
+.user-card {
+    display: flex;
+    align-items: center;
+    padding: 48rpx 32rpx 40rpx;
+    border-radius: 24rpx;
+    background: linear-gradient(135deg, #1e6fff, #4d8dff);
+    color: #ffffff;
+    margin-top: 20rpx;
+}
+
+.avatar {
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 50%;
+    border: 4rpx solid rgba(255, 255, 255, 0.6);
+    background: #ffffff;
+    flex: none;
+}
+
+.user-info {
+    margin-left: 24rpx;
+    flex: 1;
+}
+
+.user-name {
+    font-size: 36rpx;
+    font-weight: 700;
+}
+
+.user-tag-row {
+    display: flex;
+    align-items: center;
+    margin-top: 14rpx;
+}
+
+.member-tag {
+    background: rgba(255, 255, 255, 0.22);
+    border-radius: 20rpx;
+    font-size: 22rpx;
+    padding: 4rpx 16rpx;
+}
+
+.invite-code {
+    font-size: 22rpx;
+    opacity: 0.9;
+    padding: 4rpx 12rpx;
+    border: 1rpx dashed rgba(255, 255, 255, 0.6);
+    border-radius: 20rpx;
+}
+
+.user-phone {
+    margin-top: 20rpx;
+    font-size: 22rpx;
+    opacity: 0.85;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.phoneicon {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+}
+
+/* 游客态 */
+.avatar-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 60rpx;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.login-tip-text {
+    margin-top: 10rpx;
+    font-size: 22rpx;
+    opacity: 0.9;
+}
+
+.login-entry {
+    margin-top: 16rpx;
+    display: inline-block;
+    background: #ffffff;
+    color: #1e6fff;
+    font-size: 24rpx;
+    font-weight: 600;
+    padding: 10rpx 28rpx;
+    border-radius: 32rpx;
+}
+
+/* 收益概览 */
+.balance-card {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 20rpx;
+    margin-top: 20rpx;
+    padding: 28rpx 0;
+}
+
+.balance-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.balance-num {
+    font-size: 34rpx;
+    font-weight: 700;
+    color: #1f2329;
+}
+
+.balance-arrow {
+    font-size: 40rpx;
+    color: #c0c6cf;
+    line-height: 1;
+}
+
+.balance-label {
+    margin-top: 8rpx;
+    font-size: 22rpx;
+    color: #9aa1ab;
+}
+
+.balance-divider {
+    width: 1rpx;
+    height: 48rpx;
+    background: #f0f1f3;
+}
+
+/* 订单卡片 */
+.order-tabs {
+    display: flex;
+    margin-top: 20rpx;
+}
+
+.order-tab {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding: 8rpx 0 16rpx;
+}
+
+.order-icon {
+    width: 44rpx;
+    height: 44rpx;
+}
+
+.order-label {
+    margin-top: 8rpx;
+    font-size: 22rpx;
+    color: #4b5563;
+}
+
+.badge {
+    position: absolute;
+    top: -4rpx;
+    right: 50%;
+    transform: translateX(50%);
+    min-width: 32rpx;
+    height: 32rpx;
+    line-height: 32rpx;
+    text-align: center;
+    background: #f43f5e;
+    color: #ffffff;
+    font-size: 20rpx;
+    border-radius: 16rpx;
+    padding: 0 8rpx;
+}
+
+/* 菜单 */
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 22rpx 4rpx;
+}
+
+.menu-icon1 {
+    width: 36rpx;
+    height: 27rpx;
+    margin-right: 20rpx;
+}
+
+.menu-icon {
+    width: 36rpx;
+    height: 36rpx;
+    margin-right: 20rpx;
+}
+
+.menu-name {
+    font-size: 28rpx;
+    color: #1f2329;
+    font-weight: 500;
+}
+
+.menu-desc {
+    flex: 1;
+    text-align: right;
+    font-size: 24rpx;
+    color: #9aa1ab;
+    margin-right: 12rpx;
+}
+
+.menu-arrow {
+    color: #c0c6cf;
+    font-size: 32rpx;
+    margin-left: 10px;
+}
+
+.logout-text {
+    color: #f43f5e;
+    font-size: 28rpx;
+}

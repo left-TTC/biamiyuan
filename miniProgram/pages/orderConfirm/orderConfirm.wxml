@@ -1,0 +1,90 @@
+<!-- pages/orderConfirm/orderConfirm.wxml -->
+<navigation-bar title="确认订单" back="{{true}}" color="black" background="#F5F6FA"></navigation-bar>
+
+<scroll-view class="scrollarea" scroll-y>
+    <view class="page">
+        <!-- 收货地址 -->
+        <view class="card addr-card" bindtap="chooseAddress">
+            <block wx:if="{{address}}">
+                <view class="addr-icon">📍</view>
+                <view class="flex-1">
+                    <view class="addr-line1">
+                        <text class="addr-name">{{address.name}}</text>
+                        <text class="addr-phone">{{address.phone}}</text>
+                        <text wx:if="{{address.isDefault}}" class="addr-default">默认</text>
+                    </view>
+                    <view class="addr-detail">{{address.region}} {{address.detail}}</view>
+                </view>
+                <text class="addr-arrow">›</text>
+            </block>
+            <view wx:else class="addr-empty">
+                <text class="addr-empty-text">＋ 请添加收货地址</text>
+            </view>
+        </view>
+
+        <!-- 商品清单 -->
+        <view class="card">
+            <view class="goods-row" wx:for="{{items}}" wx:key="id">
+                <view class="goods-pic" style="background: linear-gradient(135deg, {{item.colors[0]}}, {{item.colors[1]}});">
+                    <image wx:if="{{item.images.length}}" class="goods-img" src="{{item.images[0]}}" mode="aspectFill" />
+                    <text wx:else class="goods-emoji">{{item.emoji}}</text>
+                </view>
+                <view class="goods-info">
+                    <view class="goods-name">
+                        {{item.name}}
+                        <text wx:if="{{item.service}}" class="tag tag-service">服务</text>
+                    </view>
+                    <view wx:if="{{item.attrsText}}" class="goods-attrs">{{item.attrsText}}</view>
+                    <view wx:if="{{item.service && item.sourceTeam}}" class="goods-attrs">来源：{{item.sourceTeam}}</view>
+                    <view class="goods-foot">
+                        <view class="price">
+                            <text class="price-symbol">¥</text>
+                            <text class="price-num">{{item.price}}</text>
+                        </view>
+                        <text class="goods-count">×{{item.count}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+        <!-- 订单备注 -->
+        <view class="card row-input">
+            <text class="row-label">订单备注</text>
+            <input class="row-input-field" placeholder="选填，给商家留言" value="{{remark}}" bindinput="onRemarkInput" />
+        </view>
+
+        <!-- 金额明细 -->
+        <view class="card amount-card">
+            <view class="amount-row">
+                <text>商品金额</text>
+                <text>¥{{total}}</text>
+            </view>
+            <view class="amount-row">
+                <text>运费</text>
+                <text class="free">免运费</text>
+            </view>
+            <view class="amount-row total-row">
+                <text>实付款</text>
+                <view class="price">
+                    <text class="price-symbol">¥</text>
+                    <text class="price-num">{{total}}</text>
+                </view>
+            </view>
+        </view>
+
+        <!-- 邀请提示 -->
+        <view class="card invite-tip">🤝 分享给好友购买，可得 {{rateText}} 佣金</view>
+    </view>
+</scroll-view>
+
+<!-- 底部提交栏 -->
+<view class="footer safe-bottom">
+    <view class="total-box">
+        <text class="total-label">实付款：</text>
+        <view class="price">
+            <text class="price-symbol">¥</text>
+            <text class="price-num">{{total}}</text>
+        </view>
+    </view>
+    <button class="btn btn-primary submit-btn" bindtap="submit" disabled="{{!canSubmit}}">提交订单</button>
+</view>

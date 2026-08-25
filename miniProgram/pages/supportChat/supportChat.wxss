@@ -1,0 +1,100 @@
+/* pages/supportChat/supportChat.wxss */
+.page {
+    padding: 24rpx;
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 100rpx);
+}
+
+.ticket-head {
+    background: #fff;
+    border-radius: 16rpx;
+    padding: 24rpx;
+    margin-bottom: 20rpx;
+}
+.ticket-subject {
+    font-size: 32rpx;
+    font-weight: 700;
+}
+.ticket-meta {
+    font-size: 22rpx;
+    color: #999;
+    margin-top: 8rpx;
+}
+
+.chat-scroll {
+    flex: 1;
+    min-height: 600rpx;
+    background: #f5f6fa;
+    border-radius: 16rpx;
+    padding: 20rpx;
+    box-sizing: border-box;
+}
+.chat-list {
+    padding-bottom: 20rpx;
+}
+.chat-msg {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20rpx;
+    max-width: 80%;
+}
+.chat-left {
+    align-items: flex-start;
+}
+.chat-right {
+    align-items: flex-end;
+    margin-left: auto;
+}
+.chat-sender {
+    font-size: 20rpx;
+    color: #999;
+    margin-bottom: 6rpx;
+}
+.chat-bubble {
+    background: #fff;
+    border-radius: 16rpx;
+    padding: 16rpx 20rpx;
+    font-size: 28rpx;
+    line-height: 1.5;
+    word-break: break-word;
+    box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
+}
+.chat-right .chat-bubble {
+    background: #1e6fff;
+    color: #fff;
+}
+.chat-time {
+    font-size: 20rpx;
+    color: #c0c6cf;
+    margin-top: 6rpx;
+}
+.chat-empty {
+    text-align: center;
+    color: #999;
+    padding: 100rpx 0;
+    font-size: 24rpx;
+}
+
+.chat-inputbar {
+    display: flex;
+    align-items: center;
+    gap: 16rpx;
+    margin-top: 20rpx;
+}
+.chat-input {
+    flex: 1;
+    background: #fff;
+    border-radius: 40rpx;
+    padding: 18rpx 28rpx;
+    font-size: 28rpx;
+    border: 1rpx solid #e5e7eb;
+}
+.chat-send {
+    white-space: nowrap;
+}
+
+.close-bar {
+    margin-top: 16rpx;
+    text-align: center;
+}

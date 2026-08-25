@@ -1,0 +1,209 @@
+.goods-attrs {
+    margin-top: 6rpx;
+    font-size: 22rpx;
+    color: #9aa1ab;
+}
+
+.tag-service {
+    background: rgba(14, 165, 233, 0.12);
+    color: #0ea5e9;
+    font-size: 18rpx;
+    margin-left: 8rpx;
+}
+
+page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #f5f6fa;
+}
+
+.scrollarea {
+    flex: 1;
+    overflow-y: auto;
+}
+
+/* 地址卡片 */
+.addr-card {
+    display: flex;
+    align-items: center;
+}
+
+.addr-icon {
+    font-size: 40rpx;
+    margin-right: 20rpx;
+}
+
+.addr-line1 {
+    display: flex;
+    align-items: center;
+}
+
+.addr-name {
+    font-size: 30rpx;
+    font-weight: 600;
+    color: #1f2329;
+}
+
+.addr-phone {
+    margin-left: 16rpx;
+    font-size: 26rpx;
+    color: #4b5563;
+}
+
+.addr-default {
+    margin-left: 12rpx;
+    font-size: 20rpx;
+    color: #1e6fff;
+    background: rgba(30, 111, 255, 0.1);
+    border-radius: 8rpx;
+    padding: 2rpx 10rpx;
+}
+
+.addr-detail {
+    margin-top: 8rpx;
+    font-size: 24rpx;
+    color: #6b7280;
+}
+
+.addr-arrow {
+    color: #c0c6cf;
+    font-size: 32rpx;
+}
+
+.addr-empty {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 20rpx 0;
+}
+
+.addr-empty-text {
+    font-size: 28rpx;
+    color: #1e6fff;
+}
+
+/* 商品行 */
+.goods-row {
+    display: flex;
+    align-items: center;
+    padding: 12rpx 0;
+}
+
+.goods-row:first-child {
+    padding-top: 0;
+}
+
+.goods-pic {
+    width: 130rpx;
+    height: 130rpx;
+    flex: none;
+    border-radius: 16rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.goods-emoji {
+    font-size: 60rpx;
+}
+
+.goods-img {
+    width: 100%;
+    height: 100%;
+}
+
+.goods-info {
+    flex: 1;
+    margin-left: 20rpx;
+}
+
+.goods-name {
+    font-size: 28rpx;
+    font-weight: 600;
+    color: #1f2329;
+}
+
+.goods-foot {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-top: 12rpx;
+}
+
+.goods-count {
+    font-size: 26rpx;
+    color: #9aa1ab;
+}
+
+/* 备注 */
+.row-input {
+    display: flex;
+    align-items: center;
+}
+
+.row-label {
+    font-size: 28rpx;
+    color: #1f2329;
+    flex: none;
+}
+
+.row-input-field {
+    flex: 1;
+    margin-left: 24rpx;
+    font-size: 26rpx;
+}
+
+/* 金额 */
+.amount-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 26rpx;
+    color: #4b5563;
+    padding: 10rpx 0;
+}
+
+.free {
+    color: #f97316;
+}
+
+.total-row {
+    font-weight: 600;
+    color: #1f2329;
+    border-top: 1rpx solid #f0f1f3;
+    margin-top: 10rpx;
+    padding-top: 20rpx;
+}
+
+.invite-tip {
+    font-size: 24rpx;
+    color: #1e6fff;
+    text-align: center;
+}
+
+/* 底部 */
+.footer {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    padding: 16rpx 24rpx;
+    box-shadow: 0 -4rpx 16rpx rgba(0, 0, 0, 0.05);
+}
+
+.total-box {
+    flex: 1;
+    display: flex;
+    align-items: baseline;
+}
+
+.total-label {
+    font-size: 26rpx;
+    color: #4b5563;
+}
+
+.submit-btn {
+    height: 76rpx;
+    line-height: 76rpx;
+    padding: 0 56rpx;
+}

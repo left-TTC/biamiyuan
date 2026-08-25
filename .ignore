@@ -1,0 +1,65 @@
+# ===== 系统文件 =====
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# ===== 编辑器 / IDE =====
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# ===== 环境配置（含密钥，严禁提交；保留示例配置） =====
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# ===== Go 编译产物 =====
+server/socialserver
+server/mall-server
+server/nohup.out
+*.exe
+*.test
+*.out
+
+# ===== 数据库（SQLite 运行时文件） =====
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+data/
+server/data/
+!data/README.md
+!server/data/README.md
+
+# ===== 日志 =====
+*.log
+logs/
+nohup.out
+
+# ===== 上传文件（运行时生成，勿入库） =====
+server/uploads/
+uploads/
+
+# ===== 前端（admin）依赖与构建产物 =====
+node_modules/
+admin/node_modules/
+admin/dist/
+dist/
+*.tsbuildinfo
+npm-debug.log*
+yarn-error.log*
+
+# ===== 微信小程序 =====
+project.private.config.json
+miniProgram/project.private.config.json
+miniprogram_npm/
+
+# ===== 临时 / 备份文件 =====
+*.tmp
+*.bak
+*.orig

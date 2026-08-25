@@ -1,0 +1,55 @@
+<!-- pages/orderList/orderList.wxml -->
+<navigation-bar title="我的订单" back="{{true}}" color="black" background="#F5F6FA"></navigation-bar>
+
+<view class="tabs">
+    <view
+        class="tab {{current === item.key ? 'active' : ''}}"
+        wx:for="{{tabs}}"
+        wx:key="key"
+        bindtap="switchTab"
+        data-key="{{item.key}}"
+    >{{item.label}}</view>
+</view>
+
+<scroll-view class="scrollarea" scroll-y>
+    <view class="page">
+        <view class="order-card" wx:for="{{orders}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
+            <view class="order-head">
+                <text class="order-no">订单号 {{item.orderNo}}</text>
+                <text class="order-status status-{{item.status}}">{{item.statusText}}</text>
+            </view>
+
+            <view class="order-goods">
+                <view class="goods-row" wx:for="{{item.items}}" wx:key="id" wx:for-item="goods">
+                    <view class="goods-pic" style="background: linear-gradient(135deg, {{goods.colors[0]}}, {{goods.colors[1]}});">
+                        <image wx:if="{{goods.images.length}}" class="goods-img" src="{{goods.images[0]}}" mode="aspectFill" />
+                        <text wx:else class="goods-emoji">{{goods.emoji}}</text>
+                    </view>
+                    <view class="goods-info">
+                        <view class="goods-name">{{goods.name}}</view>
+                        <view class="goods-sub">
+                            <text>¥{{goods.price}}</text>
+                            <text class="goods-count">×{{goods.count}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+
+            <view class="order-foot">
+                <text class="order-time">{{item.timeText}}</text>
+                <view class="order-total">
+                    <text>合计</text>
+                    <view class="price">
+                        <text class="price-symbol">¥</text>
+                        <text class="price-num">{{item.total}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+        <view wx:if="{{!orders.length}}" class="empty">
+            <view class="empty-icon">📋</view>
+            <view class="empty-text">暂无相关订单</view>
+        </view>
+    </view>
+</scroll-view>

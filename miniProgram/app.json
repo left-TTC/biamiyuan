@@ -1,0 +1,67 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/device/device",
+        "pages/devices/devices",
+        "pages/deviceAdd/deviceAdd",
+        "pages/category/category",
+        "pages/cart/cart",
+        "pages/user/user",
+        "pages/goods/goods",
+        "pages/search/search",
+        "pages/orderConfirm/orderConfirm",
+        "pages/orderList/orderList",
+        "pages/orderDetail/orderDetail",
+        "pages/address/address",
+        "pages/addressEdit/addressEdit",
+        "pages/invite/invite",
+        "pages/team/team",
+        "pages/commission/commission",
+        "pages/withdraw/withdraw",
+        "pages/login/login",
+        "pages/profile/profile",
+        "pages/support/support",
+        "pages/supportChat/supportChat"
+    ],
+    "window": {
+        "navigationBarTextStyle": "black",
+        "navigationStyle": "custom",
+        "backgroundColor": "#F5F6FA"
+    },
+    "tabBar": {
+        "color": "#999999",
+        "selectedColor": "#1E6FFF",
+        "backgroundColor": "#ffffff",
+        "borderStyle": "black",
+        "custom": true,
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "text": "首页",
+                "iconPath": "assets/tabbar/index.png",
+                "selectedIconPath": "assets/tabbar/index-active.png"
+            },
+            {
+                "pagePath": "pages/category/category",
+                "text": "商城",
+                "iconPath": "assets/tabbar/mall.png",
+                "selectedIconPath": "assets/tabbar/mall-active.png"
+            },
+            {
+                "pagePath": "pages/cart/cart",
+                "text": "购物车",
+                "iconPath": "assets/tabbar/cart.png",
+                "selectedIconPath": "assets/tabbar/cartactive.png"
+            },
+            {
+                "pagePath": "pages/user/user",
+                "text": "我的",
+                "iconPath": "assets/tabbar/my.png",
+                "selectedIconPath": "assets/tabbar/myactive.png"
+            }
+        ]
+    },
+    "style": "v2",
+    "sitemapLocation": "sitemap.json",
+    "lazyCodeLoading": "requiredComponents"
+}

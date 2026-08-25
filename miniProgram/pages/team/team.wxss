@@ -1,0 +1,750 @@
+/* pages/team/team.wxss */
+page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #f5f6fa;
+}
+
+.scrollarea {
+    flex: 1;
+    overflow-y: auto;
+}
+
+/* 统计 */
+.team-stat {
+    display: flex;
+    border-radius: 24rpx;
+    margin-top: 20rpx;
+    padding: 36rpx 0;
+    background: linear-gradient(135deg, #1e6fff, #4d8dff);
+    color: #ffffff;
+}
+
+.stat-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-num {
+    font-size: 40rpx;
+    font-weight: 700;
+}
+
+.stat-label {
+    margin-top: 8rpx;
+    font-size: 22rpx;
+    opacity: 0.9;
+}
+
+/* 成员 */
+.list-title {
+    font-size: 28rpx;
+    font-weight: 600;
+    color: #1f2329;
+    padding-bottom: 16rpx;
+    border-bottom: 1rpx solid #f0f1f3;
+}
+
+.member-item {
+    display: flex;
+    align-items: center;
+    padding: 24rpx 0;
+    border-bottom: 1rpx solid #f7f8fa;
+}
+
+.member-item:last-child {
+    border-bottom: none;
+}
+
+.member-avatar {
+    width: 88rpx;
+    height: 88rpx;
+    border-radius: 50%;
+    background: #eef4ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48rpx;
+    flex: none;
+}
+
+.member-info {
+    flex: 1;
+    margin-left: 20rpx;
+}
+
+.member-name {
+    font-size: 28rpx;
+    font-weight: 600;
+    color: #1f2329;
+}
+
+.member-time {
+    margin-top: 6rpx;
+    font-size: 22rpx;
+    color: #b0b6bf;
+}
+
+.member-data {
+    text-align: right;
+}
+
+.member-order {
+    font-size: 24rpx;
+    color: #4b5563;
+}
+
+.member-spend {
+    margin-top: 6rpx;
+    font-size: 24rpx;
+    color: #1e6fff;
+}
+
+.invite-btn {
+    margin-top: 24rpx;
+}
+
+/* 建团资格卡 */
+.qualify-card {
+    margin-top: 20rpx;
+}
+
+.qualify-title {
+    font-size: 32rpx;
+    font-weight: 700;
+    color: #1f2329;
+}
+
+.qualify-desc {
+    margin-top: 8rpx;
+    font-size: 24rpx;
+    color: #9aa1ab;
+}
+
+.qualify-item {
+    display: flex;
+    align-items: center;
+    margin-top: 20rpx;
+    padding: 20rpx 24rpx;
+    border-radius: 16rpx;
+    background: #f7f8fa;
+    font-size: 26rpx;
+    color: #6b7280;
+}
+
+.qualify-item.done {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+}
+
+.qualify-check {
+    margin-right: 16rpx;
+    font-size: 30rpx;
+    flex: none;
+}
+
+.qualify-tip {
+    margin-top: 16rpx;
+    font-size: 22rpx;
+    color: #b0b6bf;
+}
+
+.create-row {
+    margin-top: 24rpx;
+}
+
+.create-input {
+    height: 80rpx;
+    background: #f5f6fa;
+    border-radius: 12rpx;
+    padding: 0 24rpx;
+    font-size: 28rpx;
+}
+
+.create-btn {
+    margin-top: 20rpx;
+}
+
+.go-invite-btn {
+    margin-top: 20rpx;
+}
+
+/* 团队信息 */
+.team-hero {
+    margin-top: 20rpx;
+    border-radius: 24rpx;
+    padding: 40rpx 32rpx;
+    background: linear-gradient(135deg, #1e6fff, #4d8dff);
+    color: #ffffff;
+    text-align: center;
+}
+
+.team-hero-emoji {
+    font-size: 64rpx;
+}
+
+.team-hero-name {
+    margin-top: 12rpx;
+    font-size: 40rpx;
+    font-weight: 700;
+}
+
+.team-hero-owner {
+    margin-top: 8rpx;
+    font-size: 24rpx;
+    opacity: 0.9;
+}
+
+.team-hero-stats {
+    display: flex;
+    margin-top: 28rpx;
+}
+
+.hero-stat {
+    flex: 1;
+    border-right: 1rpx solid rgba(255, 255, 255, 0.3);
+}
+
+.hero-stat:last-child {
+    border-right: none;
+}
+
+.hero-num {
+    font-size: 34rpx;
+    font-weight: 700;
+}
+
+.hero-label {
+    margin-top: 6rpx;
+    font-size: 22rpx;
+    opacity: 0.9;
+}
+
+/* 发布服务 */
+.publish-card {
+    margin-top: 20rpx;
+}
+
+.publish-title {
+    font-size: 30rpx;
+    font-weight: 700;
+    color: #1f2329;
+}
+
+.publish-desc {
+    margin: 8rpx 0 20rpx;
+    font-size: 24rpx;
+    color: #6b7280;
+    line-height: 1.7;
+}
+
+.member-tag {
+    font-size: 20rpx;
+    color: #1e6fff;
+    background: rgba(30, 111, 255, 0.08);
+    border-radius: 20rpx;
+    padding: 4rpx 16rpx;
+}
+
+.member-tag-support {
+    color: #0ea5e9;
+    background: rgba(14, 165, 233, 0.1);
+}
+
+.support-member-set {
+    border-top: 1rpx solid #f0f1f5;
+    margin-top: 16rpx;
+    padding-top: 20rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.support-member-desc {
+    font-size: 24rpx;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+}
+.support-member-hint {
+    font-size: 20rpx;
+    color: #999;
+    margin-top: 4rpx;
+}
+
+.member-selected {
+    background: rgba(30, 111, 255, 0.04);
+    border-radius: 16rpx;
+}
+
+.go-mall-btn {
+    margin-top: 24rpx;
+}
+
+/* 商品列表 */
+.goods-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 8rpx;
+}
+
+.goods-item {
+    width: 48%;
+    background: #ffffff;
+    border-radius: 20rpx;
+    margin-bottom: 20rpx;
+    overflow: hidden;
+}
+
+.goods-pic {
+    height: 240rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.goods-emoji {
+    font-size: 80rpx;
+}
+
+.goods-info {
+    padding: 20rpx;
+}
+
+.goods-name {
+    font-size: 26rpx;
+    font-weight: 600;
+    color: #1f2329;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.goods-desc {
+    margin-top: 6rpx;
+    font-size: 20rpx;
+    color: #9aa1ab;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.goods-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 12rpx;
+}
+
+.goods-sales {
+    font-size: 20rpx;
+    color: #b0b6bf;
+}
+
+/* 发布弹层 */
+.mask {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    display: flex;
+    align-items: flex-end;
+}
+
+.pub-popup {
+    width: 100%;
+    background: #ffffff;
+    border-radius: 32rpx 32rpx 0 0;
+    padding: 32rpx;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.popup-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20rpx;
+}
+
+.popup-title {
+    font-size: 32rpx;
+    font-weight: 700;
+    color: #1f2329;
+}
+
+.popup-close {
+    font-size: 32rpx;
+    color: #b0b6bf;
+    padding: 8rpx;
+}
+
+.pub-body {
+    max-height: 52vh;
+}
+
+.form-item {
+    margin-bottom: 24rpx;
+}
+
+.form-label {
+    display: block;
+    font-size: 26rpx;
+    color: #6b7280;
+    margin-bottom: 12rpx;
+}
+
+.form-input {
+    height: 76rpx;
+    background: #f5f6fa;
+    border-radius: 12rpx;
+    padding: 0 20rpx;
+    font-size: 28rpx;
+}
+
+.sub-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16rpx;
+}
+
+.sub-tab {
+    padding: 12rpx 28rpx;
+    border-radius: 28rpx;
+    background: #f5f6fa;
+    color: #4b5563;
+    font-size: 24rpx;
+    border: 2rpx solid transparent;
+}
+
+.sub-tab.active {
+    background: rgba(30, 111, 255, 0.1);
+    color: #1e6fff;
+    border-color: #1e6fff;
+    font-weight: 500;
+}
+
+.pub-attr-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16rpx;
+    gap: 12rpx;
+}
+
+.pub-attr-name {
+    flex: 1;
+}
+
+.pub-attr-values {
+    flex: 1.4;
+}
+
+.pub-attr-del {
+    font-size: 28rpx;
+    color: #f43f5e;
+    padding: 8rpx;
+}
+
+.popup-foot {
+    display: flex;
+    margin-top: 20rpx;
+    gap: 20rpx;
+}
+
+/* ==================== 团队邀请（团长邀请 → 对方同意后入团） ==================== */
+.invite-inbox-card {
+    margin-top: 20rpx;
+}
+
+.invite-inbox-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20rpx 0;
+    border-bottom: 1rpx solid #f7f8fa;
+}
+.invite-inbox-item:last-child {
+    border-bottom: none;
+}
+.invite-inbox-info {
+    flex: 1;
+    min-width: 0;
+    margin-right: 16rpx;
+}
+.invite-inbox-team {
+    font-size: 28rpx;
+    color: #1f2329;
+    font-weight: 600;
+}
+.invite-inbox-from {
+    margin-top: 6rpx;
+    font-size: 22rpx;
+    color: #9aa1ab;
+}
+.invite-inbox-ops {
+    flex: none;
+    display: flex;
+    gap: 12rpx;
+}
+.invite-accept {
+    background: #10b981;
+    color: #ffffff;
+}
+
+.invite-card {
+    margin-top: 20rpx;
+}
+.invite-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.invite-card-left {
+    flex: 1;
+    margin-right: 24rpx;
+}
+.invite-card-tip {
+    margin-top: 8rpx;
+    font-size: 22rpx;
+    color: #9aa1ab;
+    line-height: 1.6;
+}
+
+/* 邀请弹层 */
+.invite-popup {
+    width: 100%;
+    background: #ffffff;
+    border-radius: 32rpx 32rpx 0 0;
+    padding: 32rpx;
+    max-height: 82vh;
+    display: flex;
+    flex-direction: column;
+}
+.invite-body {
+    max-height: 66vh;
+}
+.invite-section {
+    margin-bottom: 28rpx;
+}
+.invite-section-title {
+    font-size: 26rpx;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 16rpx;
+}
+.invite-search-row {
+    display: flex;
+    gap: 16rpx;
+}
+.invite-search-input {
+    flex: 1;
+    height: 76rpx;
+    background: #f5f6fa;
+    border-radius: 12rpx;
+    padding: 0 20rpx;
+    font-size: 28rpx;
+}
+.invite-search-btn {
+    flex: none;
+}
+.invite-result-item,
+.invite-candidate-item {
+    display: flex;
+    align-items: center;
+    padding: 18rpx 0;
+    border-bottom: 1rpx solid #f7f8fa;
+}
+.invite-result-item:last-child,
+.invite-candidate-item:last-child {
+    border-bottom: none;
+}
+.invite-result-info {
+    flex: 1;
+    min-width: 0;
+    margin-left: 16rpx;
+    margin-right: 16rpx;
+}
+.invite-status-text {
+    flex: none;
+    font-size: 22rpx;
+    color: #b0b6bf;
+}
+
+
+/* 团长审核申请 */
+.review-card {
+    margin-top: 20rpx;
+}
+
+.review-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20rpx 0;
+    border-bottom: 1rpx solid #f7f8fa;
+}
+
+.review-item:last-child {
+    border-bottom: none;
+}
+
+.review-info {
+    flex: 1;
+    min-width: 0;
+    margin-right: 16rpx;
+}
+
+.review-name {
+    font-size: 26rpx;
+    color: #1f2329;
+    font-weight: 500;
+}
+
+.review-time {
+    margin-top: 6rpx;
+    font-size: 20rpx;
+    color: #b0b6bf;
+}
+
+.review-ops {
+    flex: none;
+    display: flex;
+    gap: 12rpx;
+}
+
+.review-approve {
+    background: #10b981;
+    color: #ffffff;
+}
+
+/* 成员申请创建自己的团队 */
+.create-own-card {
+    margin-top: 20rpx;
+}
+
+.apply-status {
+    margin-top: 16rpx;
+    border-radius: 16rpx;
+    padding: 20rpx 24rpx;
+    background: #f7f8fa;
+}
+
+.apply-status.pending {
+    background: rgba(245, 158, 11, 0.1);
+}
+
+.apply-status.approved {
+    background: rgba(16, 185, 129, 0.1);
+}
+
+.apply-status.rejected {
+    background: rgba(244, 63, 94, 0.08);
+}
+
+.apply-status-text {
+    font-size: 26rpx;
+    color: #1f2329;
+    font-weight: 500;
+}
+
+.apply-team {
+    margin-top: 8rpx;
+    font-size: 24rpx;
+    color: #6b7280;
+}
+
+
+.popup-body {
+    max-height: 60vh;
+}
+.popup-scroll {
+    padding: 0 32rpx;
+    box-sizing: border-box;
+}
+.member-sub {
+    font-size: 20rpx;
+    color: #999;
+    margin-top: 4rpx;
+}
+
+/* ==================== 团队金库 ==================== */
+.treasury-card {
+    padding: 32rpx;
+}
+.treasury-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.treasury-left {
+    flex: 1;
+    margin-right: 24rpx;
+}
+.treasury-label {
+    font-size: 34rpx;
+    font-weight: 700;
+    color: #1e293b;
+}
+.treasury-tip {
+    margin-top: 8rpx;
+    font-size: 24rpx;
+    color: #94a3b8;
+    line-height: 1.5;
+}
+.treasury-amount {
+    font-size: 44rpx;
+    font-weight: 700;
+    color: #f59e0b;
+}
+.treasury-ops {
+    display: flex;
+    gap: 20rpx;
+    margin-top: 28rpx;
+}
+.treasury-op-btn {
+    flex: 1;
+}
+.treasury-balance-tip {
+    padding: 20rpx 24rpx;
+    border-radius: 16rpx;
+    background: #fef3c7;
+    color: #b45309;
+    font-size: 26rpx;
+    margin-bottom: 24rpx;
+}
+.treasury-logs {
+    margin-top: 8rpx;
+}
+.treasury-log {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20rpx 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+.treasury-log:last-child {
+    border-bottom: none;
+}
+.treasury-log-text {
+    font-size: 28rpx;
+    color: #334155;
+}
+.treasury-log-time {
+    margin-top: 4rpx;
+    font-size: 24rpx;
+    color: #94a3b8;
+}
+.treasury-log-amount {
+    font-size: 30rpx;
+    font-weight: 600;
+}
+.treasury-log-amount.plus {
+    color: #16a34a;
+}
+.treasury-log-amount.minus {
+    color: #ef4444;
+}

@@ -1,0 +1,166 @@
+/* pages/device/device.wxss */
+page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #f5f6fa;
+}
+
+.scrollarea {
+    flex: 1;
+    overflow-y: auto;
+}
+
+/* 设备信息头部 */
+.device-hero {
+    display: flex;
+    align-items: center;
+    margin-top: 20rpx;
+    border-radius: 24rpx;
+    padding: 40rpx 32rpx;
+    background: #ffffff;
+}
+
+.device-hero.alarm {
+    background: linear-gradient(135deg, #fff5f5, #ffffff);
+}
+
+.hero-icon {
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 24rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 60rpx;
+    color: #ffffff;
+    margin-right: 24rpx;
+}
+
+.hero-name {
+    font-size: 36rpx;
+    font-weight: 700;
+    color: #1f2329;
+}
+
+.hero-status {
+    margin-top: 10rpx;
+    font-size: 26rpx;
+}
+
+.status-text-online {
+    color: #10b981;
+}
+
+.status-text-offline {
+    color: #9ca3af;
+}
+
+.status-text-alarm {
+    color: #f43f5e;
+}
+
+/* 参数 */
+.info-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18rpx 0;
+    font-size: 26rpx;
+}
+
+.info-label {
+    color: #9aa1ab;
+    flex: none;
+}
+
+.info-value {
+    color: #4b5563;
+}
+
+/* 菜单 */
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 22rpx 4rpx;
+}
+
+.menu-icon {
+    font-size: 36rpx;
+    margin-right: 20rpx;
+}
+
+.menu-name {
+    font-size: 28rpx;
+    color: #1f2329;
+    font-weight: 500;
+}
+
+.menu-desc {
+    flex: 1;
+    text-align: right;
+    font-size: 24rpx;
+    color: #9aa1ab;
+    margin-right: 12rpx;
+}
+
+.menu-arrow {
+    color: #c0c6cf;
+    font-size: 32rpx;
+}
+
+.remove-text {
+    color: #f43f5e;
+}
+
+/* 消息 */
+.msg-card {
+    display: flex;
+    background: #ffffff;
+    border-radius: 20rpx;
+    padding: 24rpx;
+    margin-bottom: 20rpx;
+}
+
+.msg-icon {
+    width: 80rpx;
+    height: 80rpx;
+    flex: none;
+    border-radius: 20rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40rpx;
+}
+
+.msg-alarm {
+    background: rgba(244, 63, 94, 0.12);
+}
+
+.msg-status {
+    background: rgba(245, 158, 11, 0.14);
+}
+
+.msg-info {
+    margin-left: 20rpx;
+    flex: 1;
+}
+
+.msg-title {
+    font-size: 28rpx;
+    font-weight: 600;
+    color: #1f2329;
+}
+
+.msg-content {
+    margin-top: 8rpx;
+    font-size: 24rpx;
+    color: #6b7280;
+    line-height: 1.6;
+}
+
+.msg-time {
+    margin-top: 8rpx;
+    font-size: 20rpx;
+    color: #b0b6bf;
+}

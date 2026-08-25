@@ -1,0 +1,63 @@
+/* custom-tab-bar/index.wxss */
+
+.tab-bar {
+    display: flex;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #ffffff;
+    border-top: 1rpx solid #e5e7eb;
+    box-shadow: 0 -4rpx 16rpx rgba(0, 0, 0, 0.03);
+    /* 底部安全区（iPhone 横条） */
+    padding-bottom: env(safe-area-inset-bottom);
+    z-index: 999;
+}
+
+.tab-bar-item {
+    flex: 1;
+    height: 100rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+}
+
+.tab-bar-icon-wrap {
+    position: relative;
+}
+
+/* 图标大小在这里调整（宽高同时修改，保持正方形）：
+   54rpx ≈ 原生 tabBar 图标大小；调大数值图标更大 */
+.tab-bar-icon {
+    width: 32rpx;
+    height: 32rpx;
+}
+
+.tab-bar-badge {
+    position: absolute;
+    top: -10rpx;
+    right: -16rpx;
+    min-width: 30rpx;
+    height: 30rpx;
+    line-height: 30rpx;
+    text-align: center;
+    background: #f43f5e;
+    color: #ffffff;
+    font-size: 20rpx;
+    border-radius: 15rpx;
+    padding: 0 8rpx;
+}
+
+.tab-bar-text {
+    margin-top: 6rpx;
+    font-size: 20rpx;
+    color: #999999;
+    line-height: 1;
+}
+
+.tab-bar-item.active .tab-bar-text {
+    color: #1e6fff;
+    font-weight: 500;
+}

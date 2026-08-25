@@ -1,0 +1,42 @@
+/* pages/addressEdit/addressEdit.wxss */
+.form-card {
+    margin-top: 20rpx;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    padding: 24rpx 0;
+    border-bottom: 1rpx solid #f0f1f3;
+}
+
+.form-row:last-child {
+    border-bottom: none;
+}
+
+.form-label {
+    width: 180rpx;
+    font-size: 28rpx;
+    color: #1f2329;
+    flex: none;
+}
+
+.form-input {
+    flex: 1;
+    font-size: 28rpx;
+}
+
+.form-row-area {
+    align-items: flex-start;
+}
+
+.form-textarea {
+    flex: 1;
+    font-size: 28rpx;
+    min-height: 100rpx;
+    line-height: 1.6;
+}
+
+.save-btn {
+    margin-top: 40rpx;
+}

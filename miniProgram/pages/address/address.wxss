@@ -1,0 +1,100 @@
+/* pages/address/address.wxss */
+page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #f5f6fa;
+}
+
+.scrollarea {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.addr-item {
+    background: #ffffff;
+    border-radius: 20rpx;
+    padding: 24rpx;
+    margin-bottom: 20rpx;
+}
+
+.addr-line1 {
+    display: flex;
+    align-items: center;
+}
+
+.addr-name {
+    font-size: 30rpx;
+    font-weight: 600;
+    color: #1f2329;
+}
+
+.addr-phone {
+    margin-left: 16rpx;
+    font-size: 26rpx;
+    color: #4b5563;
+}
+
+.addr-default {
+    margin-left: 12rpx;
+    font-size: 20rpx;
+    color: #1e6fff;
+    background: rgba(30, 111, 255, 0.1);
+    border-radius: 8rpx;
+    padding: 2rpx 10rpx;
+}
+
+.addr-detail {
+    margin-top: 10rpx;
+    font-size: 26rpx;
+    color: #6b7280;
+}
+
+.addr-ops {
+    display: flex;
+    justify-content: flex-end;
+    border-top: 1rpx solid #f0f1f3;
+    margin-top: 16rpx;
+    padding-top: 16rpx;
+}
+
+.op-btn {
+    font-size: 24rpx;
+    color: #6b7280;
+    padding: 4rpx 16rpx;
+    margin-left: 8rpx;
+}
+
+.default-row {
+    margin-top: 8rpx;
+    padding-top: 8rpx;
+}
+
+.default-left {
+    display: inline-flex;
+    align-items: center;
+    font-size: 24rpx;
+    color: #9aa1ab;
+}
+
+.radio {
+    width: 32rpx;
+    height: 32rpx;
+    border-radius: 50%;
+    border: 2rpx solid #d0d5dd;
+    margin-right: 12rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 20rpx;
+}
+
+.radio.on {
+    background: #1e6fff;
+    border-color: #1e6fff;
+}
+
+.add-btn {
+    margin-top: 8rpx;
+}

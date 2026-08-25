@@ -1,0 +1,471 @@
+<!-- pages/team/team.wxml -->
+<navigation-bar title="我的团队" back="{{true}}" color="black" background="#F5F6FA"></navigation-bar>
+
+<scroll-view class="scrollarea" scroll-y>
+    <view class="page">
+        <!-- 未建团：建团资格 -->
+        <block wx:if="{{!myTeam}}">
+            <view class="card qualify-card">
+                <view class="qualify-title">🏆 创建团队</view>
+                <view class="qualify-desc">满足以下任一条件即可创建团队：</view>
+                <view class="qualify-item {{inviteCount > 2 ? 'done' : ''}}">
+                    <text class="qualify-check">{{inviteCount > 2 ? '✓' : '○'}}</text>
+                    <text>邀请好友超过 2 人（当前 {{inviteCount}}/3）</text>
+                </view>
+                <view class="qualify-item {{canCreate && inviteCount <= 2 ? 'done' : ''}}">
+                    <text class="qualify-check">{{canCreate && inviteCount <= 2 ? '✓' : '○'}}</text>
+                    <text>所在团队经营金额超过 10000 元</text>
+                </view>
+                <view wx:if="{{canCreate}}" class="create-row">
+                    <input
+                        class="create-input"
+                        placeholder="输入团队名称（如：平安守护队）"
+                        value="{{createName}}"
+                        maxlength="20"
+                        bindinput="onCreateName"
+                    />
+                </view>
+                <button wx:if="{{canCreate}}" class="btn btn-primary btn-block create-btn" bindtap="createTeam" disabled="{{creating}}">
+                    {{creating ? '创建中…' : '创建团队'}}
+                </button>
+                <view wx:else class="qualify-tip">
+                    继续邀请好友（{{inviteCount}}/3），或加入团队达成经营金额后即可创建
+                </view>
+                <button class="btn btn-outline btn-block go-invite-btn" bindtap="goInvite">＋ 去邀请好友</button>
+            </view>
+
+            <!-- 收到的团队邀请（同意后入团） -->
+            <view wx:if="{{teamInviteInbox.length}}" class="card invite-inbox-card">
+                <view class="publish-title">📨 收到的团队邀请（{{teamInviteInbox.length}}）</view>
+                <view class="publish-desc">团长邀请你加入团队，同意后即可成为团队成员</view>
+                <view class="invite-inbox-item" wx:for="{{teamInviteInbox}}" wx:key="id">
+                    <view class="invite-inbox-info">
+                        <view class="invite-inbox-team">「{{item.teamName}}」邀请你加入</view>
+                        <view class="invite-inbox-from">邀请人：{{item.inviterName || item.inviterPhone}} · {{item.timeText}}</view>
+                    </view>
+                    <view class="invite-inbox-ops">
+                        <button class="btn btn-primary btn-mini invite-accept" bindtap="acceptInvite" data-id="{{item.id}}">同意</button>
+                        <button class="btn btn-outline btn-mini" bindtap="rejectInvite" data-id="{{item.id}}">拒绝</button>
+                    </view>
+                </view>
+            </view>
+
+            <!-- 加入团队（成为成员后可申请创建自己的团队，需团长审核） -->
+            <view class="card join-card">
+                <view class="publish-title">🤝 加入团队</view>
+                <view class="publish-desc">输入团长分享的团队 ID 加入团队；加入后成为团员，可申请创建自己的团队（需团长审核）</view>
+                <input
+                    class="create-input"
+                    placeholder="输入团队 ID（如 t_xxxx）"
+                    value="{{joinTeamId}}"
+                    maxlength="30"
+                    bindinput="onJoinTeamId"
+                />
+                <button class="btn btn-outline btn-block create-btn" bindtap="joinTeam" disabled="{{joining}}">
+                    {{joining ? '加入中…' : '加入团队'}}
+                </button>
+            </view>
+        </block>
+
+        <!-- 已建团：团队信息 + 发布服务 -->
+        <block wx:else>
+            <view class="team-hero">
+                <view class="team-hero-emoji">🏆</view>
+                <view class="team-hero-name">{{myTeam.name}}</view>
+                <view class="team-hero-owner">队长：{{myTeam.ownerName || myTeam.ownerPhone}}</view>
+                <view class="team-hero-stats">
+                    <view class="hero-stat">
+                        <view class="hero-num">{{myTeam.members.length}}</view>
+                        <view class="hero-label">成员</view>
+                    </view>
+                    <view class="hero-stat">
+                        <view class="hero-num">¥{{myTeam.businessAmount}}</view>
+                        <view class="hero-label">经营金额</view>
+                    </view>
+                    <view class="hero-stat">
+                        <view class="hero-num">¥{{myTeam.treasury}}</view>
+                        <view class="hero-label">金库</view>
+                    </view>
+                </view>
+            </view>
+
+            <!-- 团长：邀请成员入团（优先邀请好友 / 手机号查询，对方同意后入团） -->
+            <view wx:if="{{isLeader}}" class="card invite-card">
+                <view class="invite-card-head">
+                    <view class="invite-card-left">
+                        <view class="publish-title">🤝 邀请成员入团</view>
+                        <view class="invite-card-tip">优先从邀请好友中选取，或手机号查询用户；对方同意后加入团队</view>
+                    </view>
+                    <button class="btn btn-primary btn-sm" bindtap="openInvite">＋ 邀请成员</button>
+                </view>
+            </view>
+
+            <!-- 团长：待审核建团申请 -->
+            <view wx:if="{{isLeader}}" class="card review-card">
+                <view class="publish-title">📥 待审核建团申请（{{inbox.length}}）</view>
+                <view wx:if="{{!inbox.length}}" class="qualify-tip">暂无待审核申请</view>
+                <view class="review-item" wx:for="{{inbox}}" wx:key="id">
+                    <view class="review-info">
+                        <view class="review-name">成员「{{item.requesterName}}」申请创建「{{item.teamName}}」</view>
+                        <view class="review-time">{{item.timeText}} 提交</view>
+                    </view>
+                    <view class="review-ops">
+                        <button class="btn btn-primary btn-mini review-approve" bindtap="approveReq" data-id="{{item.id}}">通过</button>
+                        <button class="btn btn-outline btn-mini review-reject" bindtap="rejectReq" data-id="{{item.id}}">驳回</button>
+                    </view>
+                </view>
+            </view>
+
+            <!-- 成员：申请创建自己的团队 -->
+            <view wx:if="{{!isLeader}}" class="card create-own-card">
+                <view class="publish-title">🚀 创建自己的团队</view>
+                <view class="publish-desc">你是「{{myTeam.name}}」的成员，创建新团队需提交申请，由团长「{{myTeam.ownerName || myTeam.ownerPhone}}」审核通过后生效</view>
+
+                <block wx:if="{{myApply}}">
+                    <view class="apply-status {{myApply.status}}">
+                        <view class="apply-status-text">{{applyStatusText}}</view>
+                        <view class="apply-team">申请团队：{{myApply.teamName}}</view>
+                    </view>
+                    <button class="btn btn-outline btn-block create-btn" bindtap="refresh">刷新查看</button>
+                </block>
+
+                <block wx:elif="{{canCreate}}">
+                    <input
+                        class="create-input"
+                        placeholder="输入新团队名称（如：平安守护队）"
+                        value="{{applyName}}"
+                        maxlength="20"
+                        bindinput="onApplyName"
+                    />
+                    <button class="btn btn-primary btn-block create-btn" bindtap="applyCreate" disabled="{{applying}}">
+                        {{applying ? '提交中…' : '提交建团申请'}}
+                    </button>
+                    <view class="qualify-tip">申请将由团长「{{myTeam.ownerName || myTeam.ownerPhone}}」审核</view>
+                </block>
+
+                <view wx:else class="qualify-tip">
+                    尚未满足建团资格（邀请好友超过 2 人，或所在团队经营金额超过 10000 元）
+                </view>
+            </view>
+
+            <view class="card publish-card">
+                <view class="publish-title">🛠 发布服务类商品</view>
+                <view class="publish-desc">团队可发布服务类商品（安装/看护/定制），将展示在商城「服务」类目并标注服务来源</view>
+                <button class="btn btn-primary btn-block" bindtap="openPublish">＋ 发布服务</button>
+            </view>
+
+            <!-- 团队金库（服务订单 90% 分成入金库，仅团长可支配） -->
+            <view class="card treasury-card">
+                <view class="treasury-head">
+                    <view class="treasury-left">
+                        <view class="treasury-label">💰 团队金库</view>
+                        <view class="treasury-tip">团队服务订单金额 90% 自动入账，平台抽成 10%</view>
+                    </view>
+                    <view class="treasury-amount">¥{{myTeam.treasury}}</view>
+                </view>
+                <view wx:if="{{isLeader}}" class="treasury-ops">
+                    <button class="btn btn-primary btn-mini treasury-op-btn" bindtap="openTreasuryWithdraw">提取到我的余额</button>
+                    <button class="btn btn-outline btn-mini treasury-op-btn" bindtap="openTreasuryTransfer">向成员转账</button>
+                </view>
+                <view wx:else class="qualify-tip">仅团长可提取/分配团队金库</view>
+                <view class="section-title">金库流水</view>
+                <view class="treasury-logs">
+                    <view class="treasury-log" wx:for="{{treasuryLogs}}" wx:key="id">
+                        <view class="treasury-log-info">
+                            <view class="treasury-log-text">{{item.text}}</view>
+                            <view class="treasury-log-time">{{item.timeText}}</view>
+                        </view>
+                        <view class="treasury-log-amount {{item.type === 'income' ? 'plus' : 'minus'}}">
+                            {{item.sign}}¥{{item.amount}}
+                        </view>
+                    </view>
+                    <view wx:if="{{!treasuryLogs.length}}" class="qualify-tip">暂无金库流水</view>
+                </view>
+            </view>
+
+            <view class="section-title">我的团队服务（{{teamProducts.length}}）</view>
+            <view class="goods-list">
+                <view class="goods-item" wx:for="{{teamProducts}}" wx:key="id">
+                    <view class="goods-pic" style="background: linear-gradient(135deg, {{item.colors[0]}}, {{item.colors[1]}});">
+                        <text class="goods-emoji">{{item.emoji}}</text>
+                    </view>
+                    <view class="goods-info">
+                        <view class="goods-name">{{item.name}}</view>
+                        <view class="goods-desc">{{item.desc}}</view>
+                        <view class="goods-foot">
+                            <view class="price">
+                                <text class="price-symbol">¥</text>
+                                <text class="price-num">{{item.price}}</text>
+                            </view>
+                            <text class="goods-sales">已售{{item.sales}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view wx:if="{{!teamProducts.length}}" class="empty">
+                <view class="empty-icon">🛠</view>
+                <view class="empty-text">还没有发布服务，点击上方「发布服务」</view>
+            </view>
+
+            <view class="section-title">团队成员（{{myTeam.members.length}}）</view>
+            <view class="card">
+                <view class="member-item" wx:for="{{myTeam.members}}" wx:key="phone">
+                    <view class="member-avatar">👤</view>
+                    <view class="member-info">
+                        <view class="member-name">{{item.nickName || item.phone}}</view>
+                        <view wx:if="{{item.phone === myTeam.supportMemberPhone}}" class="member-tag member-tag-support">🎧 客服</view>
+                    </view>
+                    <view wx:if="{{item.phone === myTeam.ownerPhone}}" class="member-tag">队长</view>
+                </view>
+                <!-- 团长：指定客服成员（团队服务会话由该成员接收/回复） -->
+                <view wx:if="{{isLeader}}" class="support-member-set">
+                    <view class="support-member-desc">
+                        客服成员：{{myTeam.supportMemberPhone || '未指定'}}
+                        <text class="support-member-hint">团队服务咨询将由该成员在「联系客服」中接收与回复</text>
+                    </view>
+                    <button class="btn btn-outline btn-sm" bindtap="openSupportMember">指定客服成员</button>
+                </view>
+            </view>
+        </block>
+
+        <button class="btn btn-outline btn-block go-mall-btn" bindtap="goServiceMall">去商城逛逛</button>
+    </view>
+</scroll-view>
+
+<!-- 发布服务弹层 -->
+<view wx:if="{{showPublish}}" class="mask" bindtap="closePublish">
+    <view class="pub-popup" catchtap="noop">
+        <view class="popup-header">
+            <view class="popup-title">发布服务类商品</view>
+            <view class="popup-close" bindtap="closePublish">✕</view>
+        </view>
+        <scroll-view class="pub-body" scroll-y>
+            <view class="form-item">
+                <text class="form-label">服务名称 *</text>
+                <input class="form-input" placeholder="如：上门安装摄像头" value="{{pubForm.name}}" data-field="name" bindinput="onPubField" />
+            </view>
+            <view class="form-item">
+                <text class="form-label">价格（元）*</text>
+                <input class="form-input" type="digit" placeholder="如：99" value="{{pubForm.price}}" data-field="price" bindinput="onPubField" />
+            </view>
+            <view class="form-item">
+                <text class="form-label">服务类目</text>
+                <view class="sub-tabs">
+                    <view
+                        class="sub-tab {{pubForm.category === item.id ? 'active' : ''}}"
+                        wx:for="{{serviceCats}}"
+                        wx:key="id"
+                        bindtap="onPubCategory"
+                        data-id="{{item.id}}"
+                    >{{item.name}}</view>
+                </view>
+            </view>
+            <view class="form-item">
+                <text class="form-label">描述</text>
+                <input class="form-input" placeholder="服务一句话描述" value="{{pubForm.desc}}" data-field="desc" bindinput="onPubField" />
+            </view>
+            <view class="form-item">
+                <text class="form-label">图标（emoji）</text>
+                <input class="form-input" placeholder="如：🛠" value="{{pubForm.emoji}}" data-field="emoji" bindinput="onPubField" />
+            </view>
+
+            <view class="form-item">
+                <text class="form-label">服务属性（可选，下单时需选择）</text>
+                <view class="pub-attr-row" wx:for="{{pubForm.attributes}}" wx:key="index" wx:for-index="attrIndex">
+                    <input
+                        class="form-input pub-attr-name"
+                        placeholder="属性名，如 服务时长"
+                        value="{{item.name}}"
+                        data-index="{{attrIndex}}"
+                        data-field="name"
+                        bindinput="onPubAttr"
+                    />
+                    <input
+                        class="form-input pub-attr-values"
+                        placeholder="取值，逗号分隔，如 1周,1月"
+                        value="{{item.values}}"
+                        data-index="{{attrIndex}}"
+                        data-field="values"
+                        bindinput="onPubAttr"
+                    />
+                    <view class="pub-attr-del" bindtap="removePubAttr" data-index="{{attrIndex}}">✕</view>
+                </view>
+                <button class="btn btn-outline btn-mini" bindtap="addPubAttr">＋ 添加属性</button>
+            </view>
+        </scroll-view>
+        <view class="popup-foot">
+            <button class="btn btn-outline popup-btn" bindtap="closePublish">取消</button>
+            <button class="btn btn-primary popup-btn" bindtap="publishService" disabled="{{publishBusy}}">
+                {{publishBusy ? '发布中…' : '发布'}}
+            </button>
+        </view>
+    </view>
+</view>
+
+<!-- 指定客服成员弹层（团长） -->
+<view wx:if="{{showSupportMember}}" class="mask" bindtap="closeSupportMember">
+    <view class="popup" catchtap="noop">
+        <view class="popup-header">
+            <view class="popup-title">指定客服成员</view>
+            <view class="popup-close" bindtap="closeSupportMember">✕</view>
+        </view>
+        <scroll-view class="popup-body popup-scroll" scroll-y>
+            <view class="publish-desc">团队服务商品的客服会话将分配给该成员接收与回复</view>
+            <view
+                class="member-item {{item.phone === supportMemberPhone ? 'member-selected' : ''}}"
+                wx:for="{{myTeam.members}}"
+                wx:key="phone"
+                bindtap="onSupportMember"
+                data-phone="{{item.phone}}"
+            >
+                <view class="member-avatar">👤</view>
+                <view class="member-info">
+                    <view class="member-name">{{item.nickName || item.phone}}</view>
+                    <view class="member-sub">{{item.phone}}</view>
+                </view>
+                <view wx:if="{{item.phone === supportMemberPhone}}" class="member-tag member-tag-support">已选</view>
+            </view>
+        </scroll-view>
+        <view class="popup-foot">
+            <button class="btn btn-outline popup-btn" bindtap="closeSupportMember">取消</button>
+            <button class="btn btn-primary popup-btn" bindtap="saveSupportMember">确定</button>
+        </view>
+    </view>
+</view>
+
+<!-- 团队金库操作弹层（团长：提取 / 向成员转账） -->
+<view wx:if="{{showTreasuryWithdraw || showTreasuryTransfer}}" class="mask" bindtap="closeTreasury">
+    <view class="popup" catchtap="noop">
+        <view class="popup-header">
+            <view class="popup-title">{{showTreasuryWithdraw ? '提取金库到我的余额' : '从金库向成员转账'}}</view>
+            <view class="popup-close" bindtap="closeTreasury">✕</view>
+        </view>
+        <view class="popup-body">
+            <view class="treasury-balance-tip">当前金库余额：¥{{myTeam.treasury}}</view>
+            <block wx:if="{{showTreasuryWithdraw}}">
+                <view class="form-item">
+                    <text class="form-label">提取金额（元）</text>
+                    <input
+                        class="form-input"
+                        type="digit"
+                        placeholder="如：50"
+                        value="{{treasuryWithdrawAmount}}"
+                        bindinput="onWithdrawAmount"
+                    />
+                </view>
+                <view class="qualify-tip">提取后进入你的可提现余额，可在「提现」页申请提现</view>
+            </block>
+            <block wx:else>
+                <view class="form-item">
+                    <text class="form-label">成员手机号</text>
+                    <input
+                        class="form-input"
+                        type="number"
+                        placeholder="团队成员手机号"
+                        value="{{transferPhone}}"
+                        bindinput="onTransferPhone"
+                    />
+                </view>
+                <view class="form-item">
+                    <text class="form-label">转账金额（元）</text>
+                    <input
+                        class="form-input"
+                        type="digit"
+                        placeholder="如：20"
+                        value="{{transferAmount}}"
+                        bindinput="onTransferAmount"
+                    />
+                </view>
+            </block>
+        </view>
+        <view class="popup-foot">
+            <button class="btn btn-outline popup-btn" bindtap="closeTreasury">取消</button>
+            <button
+                class="btn btn-primary popup-btn"
+                bindtap="{{showTreasuryWithdraw ? 'doTreasuryWithdraw' : 'doTreasuryTransfer'}}"
+                disabled="{{treasuryBusy}}"
+            >
+                {{treasuryBusy ? '处理中…' : '确认'}}
+            </button>
+        </view>
+    </view>
+</view>
+
+<!-- 邀请成员入团弹层（团长：优先邀请好友 / 手机号查询 / 已发邀请管理） -->
+<view wx:if="{{showInvite}}" class="mask" bindtap="closeInvite">
+    <view class="invite-popup" catchtap="noop">
+        <view class="popup-header">
+            <view class="popup-title">🤝 邀请成员入团</view>
+            <view class="popup-close" bindtap="closeInvite">✕</view>
+        </view>
+        <scroll-view class="invite-body" scroll-y>
+            <!-- 手机号查询邀请 -->
+            <view class="invite-section">
+                <view class="invite-section-title">① 手机号邀请</view>
+                <view class="invite-search-row">
+                    <input
+                        class="invite-search-input"
+                        type="number"
+                        placeholder="输入用户手机号查询"
+                        value="{{invitePhone}}"
+                        bindinput="onInvitePhone"
+                    />
+                    <button class="btn btn-outline btn-sm invite-search-btn" bindtap="doSearchUser" disabled="{{inviteSearching}}">
+                        {{inviteSearching ? '查询中…' : '查询'}}
+                    </button>
+                </view>
+                <view wx:if="{{searchUserResult}}" class="invite-result-item">
+                    <view class="member-avatar">👤</view>
+                    <view class="invite-result-info">
+                        <view class="member-name">{{searchUserResult.nickName}}</view>
+                        <view class="member-sub">{{searchUserResult.phone}}</view>
+                    </view>
+                    <view wx:if="{{searchUserResult.statusText}}" class="invite-status-text">{{searchUserResult.statusText}}</view>
+                    <button
+                        wx:else
+                        class="btn btn-primary btn-sm"
+                        bindtap="inviteUser"
+                        data-phone="{{searchUserResult.phone}}"
+                        disabled="{{invitingPhone}}"
+                    >邀请</button>
+                </view>
+            </view>
+
+            <!-- 邀请我的好友（优先） -->
+            <view class="invite-section">
+                <view class="invite-section-title">② 邀请我的好友（{{inviteCandidates.length}}）</view>
+                <view wx:if="{{!inviteCandidates.length}}" class="qualify-tip">你还没有邀请过好友，可通过上方手机号邀请，或去邀请页邀请好友注册</view>
+                <view class="invite-candidate-item" wx:for="{{inviteCandidates}}" wx:key="phone">
+                    <view class="member-avatar">👤</view>
+                    <view class="invite-result-info">
+                        <view class="member-name">{{item.nickName || item.phone}}</view>
+                        <view class="member-sub">{{item.phone}}</view>
+                    </view>
+                    <view wx:if="{{item.statusText}}" class="invite-status-text">{{item.statusText}}</view>
+                    <button
+                        wx:else
+                        class="btn btn-primary btn-sm"
+                        bindtap="inviteUser"
+                        data-phone="{{item.phone}}"
+                        disabled="{{invitingPhone}}"
+                    >{{invitingPhone === item.phone ? '邀请中…' : '邀请'}}</button>
+                </view>
+            </view>
+
+            <!-- 已发送邀请 -->
+            <view class="invite-section">
+                <view class="invite-section-title">③ 已发送邀请（{{teamInviteOutbox.length}}）</view>
+                <view wx:if="{{!teamInviteOutbox.length}}" class="qualify-tip">暂无已发送邀请</view>
+                <view class="invite-candidate-item" wx:for="{{teamInviteOutbox}}" wx:key="id">
+                    <view class="member-avatar">👤</view>
+                    <view class="invite-result-info">
+                        <view class="member-name">{{item.inviteeName || item.inviteePhone}}</view>
+                        <view class="member-sub">{{item.inviteePhone}} · {{item.timeText}}</view>
+                    </view>
+                    <view wx:if="{{item.status !== 'pending'}}" class="invite-status-text">{{item.statusText}}</view>
+                    <button wx:else class="btn btn-outline btn-sm" bindtap="cancelInvite" data-id="{{item.id}}">取消邀请</button>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+</view>

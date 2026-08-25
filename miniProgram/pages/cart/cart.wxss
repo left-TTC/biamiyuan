@@ -1,0 +1,179 @@
+/* pages/cart/cart.wxss */
+.goods-attrs {
+    margin-top: 6rpx;
+    font-size: 22rpx;
+    color: #9aa1ab;
+}
+
+.goods-attrs-warn {
+    color: #f43f5e;
+}
+
+.tag-service {
+    background: rgba(14, 165, 233, 0.12);
+    color: #0ea5e9;
+    font-size: 18rpx;
+    margin-left: 8rpx;
+}
+page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #f5f6fa;
+    /* 底部为自定义 tabBar 预留空间（100rpx 高度 + 安全区） */
+    box-sizing: border-box;
+    padding-bottom: calc(120rpx + env(safe-area-inset-bottom));
+}
+
+.scrollarea {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 20rpx;
+    padding: 24rpx 20rpx;
+    margin-bottom: 20rpx;
+    position: relative;
+}
+
+/* 勾选框 */
+.check {
+    width: 40rpx;
+    height: 40rpx;
+    border-radius: 50%;
+    border: 2rpx solid #d0d5dd;
+    margin-right: 20rpx;
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 24rpx;
+    transition: all 0.15s;
+}
+
+.check.on {
+    background: #1e6fff;
+    border-color: #1e6fff;
+}
+
+.goods-pic {
+    width: 140rpx;
+    height: 140rpx;
+    flex: none;
+    border-radius: 16rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.goods-emoji {
+    font-size: 64rpx;
+}
+
+.goods-img {
+    width: 100%;
+    height: 100%;
+}
+
+.goods-info {
+    flex: 1;
+    margin-left: 20rpx;
+    padding-right: 30rpx;
+}
+
+.goods-name {
+    font-size: 28rpx;
+    font-weight: 600;
+    color: #1f2329;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.goods-price-row {
+    margin-top: 14rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* 步进器 */
+.stepper {
+    display: flex;
+    align-items: center;
+    background: #f5f6fa;
+    border-radius: 12rpx;
+}
+
+.step-btn {
+    width: 52rpx;
+    height: 52rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30rpx;
+    color: #4b5563;
+}
+
+.step-num {
+    min-width: 48rpx;
+    text-align: center;
+    font-size: 26rpx;
+    color: #1f2329;
+}
+
+.remove-btn {
+    position: absolute;
+    right: 16rpx;
+    top: 12rpx;
+    color: #c0c6cf;
+    font-size: 26rpx;
+    padding: 8rpx;
+}
+
+.go-shop {
+    margin-top: 24rpx;
+}
+
+/* 底部结算栏 */
+.footer {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    padding: 16rpx 24rpx;
+    box-shadow: 0 -4rpx 16rpx rgba(0, 0, 0, 0.05);
+}
+
+.check-all {
+    display: flex;
+    align-items: center;
+    margin-right: 20rpx;
+}
+
+.check-label {
+    font-size: 26rpx;
+    color: #4b5563;
+}
+
+.total {
+    flex: 1;
+    display: flex;
+    align-items: baseline;
+}
+
+.total-label {
+    font-size: 26rpx;
+    color: #4b5563;
+}
+
+.checkout-btn {
+    height: 72rpx;
+    line-height: 72rpx;
+    padding: 0 44rpx;
+}

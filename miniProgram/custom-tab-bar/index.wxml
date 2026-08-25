@@ -1,0 +1,21 @@
+<!-- custom-tab-bar/index.wxml -->
+<view class="tab-bar">
+    <view
+        class="tab-bar-item {{selected === index ? 'active' : ''}}"
+        wx:for="{{list}}"
+        wx:key="pagePath"
+        data-path="{{item.pagePath}}"
+        data-index="{{index}}"
+        bindtap="switchTab"
+    >
+        <view class="tab-bar-icon-wrap">
+            <image
+                class="tab-bar-icon"
+                src="{{selected === index ? item.selectedIconPath : item.iconPath}}"
+                mode="aspectFit"
+            ></image>
+            <view wx:if="{{item.pagePath === '/pages/cart/cart' && cartCount > 0}}" class="tab-bar-badge">{{cartCount > 99 ? '99+' : cartCount}}</view>
+        </view>
+        <text class="tab-bar-text">{{item.text}}</text>
+    </view>
+</view>

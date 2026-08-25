@@ -1,0 +1,89 @@
+<!-- pages/device/device.wxml -->
+<navigation-bar title="设备详情" back="{{true}}" color="black" background="#F5F6FA"></navigation-bar>
+
+<scroll-view class="scrollarea" scroll-y>
+    <view class="page" wx:if="{{device}}">
+        <!-- 设备信息 -->
+        <view class="device-hero {{device.status}}">
+            <view class="hero-icon" style="background: linear-gradient(135deg, {{device.colors[0]}}, {{device.colors[1]}});">
+                <text>{{device.icon}}</text>
+            </view>
+            <view class="flex-1">
+                <view class="hero-name">{{device.name}}</view>
+                <view class="hero-status status-text-{{device.status}}">● {{device.statusText}}</view>
+            </view>
+        </view>
+
+        <!-- 设备参数 -->
+        <view class="card info-card">
+            <view class="info-row">
+                <text class="info-label">设备类型</text>
+                <text class="info-value">{{device.name}}</text>
+            </view>
+            <view class="info-row">
+                <text class="info-label">设备 IMEI</text>
+                <text class="info-value">{{device.sn || device.mid || '-'}}</text>
+            </view>
+            <view class="info-row" wx:if="{{device.lastLocText}}">
+                <text class="info-label">最近位置</text>
+                <text class="info-value">{{device.lastLocText}}</text>
+            </view>
+            <view class="info-row" wx:if="{{device.healthText}}">
+                <text class="info-label">最近健康</text>
+                <text class="info-value">{{device.healthText}}</text>
+            </view>
+            <view class="info-row">
+                <text class="info-label">剩余电量</text>
+                <text class="info-value">🔋 {{device.battery}}%</text>
+            </view>
+            <view class="info-row">
+                <text class="info-label">最后活跃</text>
+                <text class="info-value">{{device.lastActiveText}}</text>
+            </view>
+            <view class="info-row">
+                <text class="info-label">绑定时间</text>
+                <text class="info-value">{{device.createTimeText}}</text>
+            </view>
+        </view>
+
+        <!-- 设备管理 -->
+        <view class="section-title">设备管理</view>
+        <view class="card">
+            <view class="menu-item" bindtap="toggleNotify">
+                <text class="menu-icon">🔔</text>
+                <text class="menu-name">设备报警通知</text>
+                <text class="menu-desc">{{device.notifyEnabled ? '已开启' : '已关闭'}}</text>
+                <text class="menu-arrow">›</text>
+            </view>
+            <view class="divider"></view>
+            <view class="menu-item" bindtap="simulateAlarm">
+                <text class="menu-icon">🚨</text>
+                <text class="menu-name">模拟设备报警</text>
+                <text class="menu-desc">演示触发报警</text>
+                <text class="menu-arrow">›</text>
+            </view>
+            <view class="divider"></view>
+            <view class="menu-item remove-item" bindtap="removeDevice">
+                <text class="menu-icon">🗑️</text>
+                <text class="menu-name remove-text">移除设备</text>
+            </view>
+        </view>
+
+        <!-- 该设备消息 -->
+        <view class="section-title">设备消息（{{messages.length}}）</view>
+        <view class="msg-card" wx:for="{{messages}}" wx:key="id">
+            <view class="msg-icon msg-{{item.type}}">
+                <text>{{device.icon}}</text>
+            </view>
+            <view class="msg-info">
+                <view class="msg-title">{{item.title}}</view>
+                <view class="msg-content">{{item.content}}</view>
+                <view class="msg-time">{{item.timeText}}</view>
+            </view>
+        </view>
+        <view wx:if="{{!messages.length}}" class="empty">
+            <view class="empty-icon">📭</view>
+            <view class="empty-text">该设备暂无消息</view>
+        </view>
+    </view>
+</scroll-view>

@@ -1,0 +1,135 @@
+/* pages/devices/devices.wxss */
+page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #f5f6fa;
+}
+
+.scrollarea {
+    flex: 1;
+    overflow-y: auto;
+}
+
+/* 统计 */
+.stat-card {
+    display: flex;
+    border-radius: 24rpx;
+    margin-top: 20rpx;
+    padding: 32rpx 0;
+    background: linear-gradient(135deg, #1e6fff, #4d8dff);
+    color: #ffffff;
+}
+
+.stat-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-num {
+    font-size: 44rpx;
+    font-weight: 700;
+}
+
+.stat-label {
+    margin-top: 6rpx;
+    font-size: 22rpx;
+    opacity: 0.9;
+}
+
+/* 设备卡片 */
+.device-card {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 20rpx;
+    padding: 24rpx;
+    margin-bottom: 20rpx;
+}
+
+.device-icon {
+    width: 96rpx;
+    height: 96rpx;
+    flex: none;
+    border-radius: 20rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48rpx;
+    color: #ffffff;
+}
+
+.device-info {
+    flex: 1;
+    margin-left: 20rpx;
+    min-width: 0;
+}
+
+.device-name-row {
+    display: flex;
+    align-items: center;
+}
+
+.device-name {
+    font-size: 30rpx;
+    font-weight: 600;
+    color: #1f2329;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 300rpx;
+}
+
+.status-badge {
+    flex: none;
+    margin-left: 12rpx;
+    font-size: 20rpx;
+    border-radius: 20rpx;
+    padding: 4rpx 16rpx;
+}
+
+.status-online {
+    background: rgba(16, 185, 129, 0.12);
+    color: #10b981;
+}
+
+.status-offline {
+    background: rgba(156, 163, 175, 0.15);
+    color: #9ca3af;
+}
+
+.status-alarm {
+    background: rgba(244, 63, 94, 0.12);
+    color: #f43f5e;
+}
+
+.device-sn {
+    margin-top: 8rpx;
+    font-size: 22rpx;
+    color: #b0b6bf;
+}
+
+.device-meta {
+    margin-top: 8rpx;
+    display: flex;
+    align-items: center;
+    font-size: 22rpx;
+    color: #6b7280;
+}
+
+.device-last {
+    margin-left: 16rpx;
+    color: #b0b6bf;
+}
+
+.device-arrow {
+    color: #c0c6cf;
+    font-size: 36rpx;
+    margin-left: 12rpx;
+}
+
+.add-btn {
+    margin-top: 8rpx;
+}
